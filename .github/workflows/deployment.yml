@@ -1,0 +1,41 @@
+name: Release - Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - release.*
+
+jobs:
+  deploy:
+    name: Deployment
+    runs-on: [ Linux ]
+    env:
+      ARTIFACTORY_URL: ${{secrets.MUDITA_ARTIFACTORY_OUTPUT_URL}}
+      ARTIFACTORY_USERNAME: ${{secrets.MUDITA_ARTIFACTORY_USERNAME}}
+      ARTIFACTORY_PASSWORD: ${{secrets.MUDITA_ARTIFACTORY_PASSWORD}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 100
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Lint kotlin check
+        timeout-minutes: 5
+        run: ./gradlew ktlintCheck
+
+      - name: Full build
+        timeout-minutes: 5
+        run: ./gradlew clean build
+
+      - name: Deploy artifactory
+        timeout-minutes: 5
+        run: ./gradlew publish

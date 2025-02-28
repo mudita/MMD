@@ -1,0 +1,13 @@
+[versions]
+agp = "8.1.1"
+coroutines = "1.8.1"
+kotlin = "1.9.0"
+ktlint = "12.1.1"
+
+[libraries]
+ktlint = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

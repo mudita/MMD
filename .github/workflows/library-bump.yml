@@ -1,0 +1,55 @@
+name: Check Version Bump
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  push:
+    branches:
+      - develop
+      - master
+
+jobs:
+  check:
+    name: Check Version Bump
+    runs-on: [ Linux ]
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Fetch latest changes
+        run: git fetch origin
+
+      - name: Check Version Bump
+        run: |
+          # Capture the version from gradle.properties of the base branch
+          OLD_VERSION=$(git show "origin/${{ github.base_ref }}:gradle.properties" | grep -i 'library.version' | cut -d'=' -f2 | tr -d '[:space:]')
+          
+          # Capture the version from gradle.properties of the head branch
+          NEW_VERSION=$(grep -i 'library.version' gradle.properties | cut -d'=' -f2 | tr -d '[:space:]')
+          
+          # Split the old and new versions into their respective parts
+          read OLD_MAJOR OLD_MINOR OLD_PATCH <<<$(echo "$OLD_VERSION" | tr '.' ' ')
+          read NEW_MAJOR NEW_MINOR NEW_PATCH <<<$(echo "$NEW_VERSION" | tr '.' ' ')
+          
+          # Compare major, then minor, then patch numbers
+          if [ "$NEW_MAJOR" -lt "$OLD_MAJOR" ]; then
+            echo "::error::Major version number must not decrease."
+            exit 1
+          elif [ "$NEW_MAJOR" -eq "$OLD_MAJOR" ]; then
+            if [ "$NEW_MINOR" -lt "$OLD_MINOR" ]; then
+              echo "::error::Minor version number must not decrease within the same major version."
+              exit 1
+            elif [ "$NEW_MINOR" -eq "$OLD_MINOR" ] && [ "$NEW_PATCH" -le "$OLD_PATCH" ]; then
+              echo "::error::Patch version number must increase within the same minor version."
+              exit 1
+            fi
+          fi
+        
+          # If we reach this point, the version bump is valid
+          echo "Version bump is valid: $OLD_VERSION -> $NEW_VERSION"
