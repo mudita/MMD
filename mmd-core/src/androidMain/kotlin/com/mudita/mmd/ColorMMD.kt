@@ -1,0 +1,46 @@
+package com.mudita.mmd
+
+import androidx.compose.material3.ColorScheme
+import androidx.compose.ui.graphics.Color
+
+val black = Color(0xFF000000)
+val white = Color(0xFFFFFFFF)
+
+val eInkColorScheme = ColorScheme(
+    primary = white,
+    onPrimary = black,
+    primaryContainer = black,
+    onPrimaryContainer = white,
+    inversePrimary = black,
+    secondary = white,
+    onSecondary = black,
+    secondaryContainer = black,
+    onSecondaryContainer = white,
+    tertiary = white,
+    onTertiary = black,
+    tertiaryContainer = black,
+    onTertiaryContainer = white,
+    background = white,
+    onBackground = black,
+    surface = white,
+    onSurface = black,
+    surfaceVariant = black,
+    onSurfaceVariant = white,
+    surfaceTint = white,
+    inverseSurface = black,
+    inverseOnSurface = white,
+    error = white,
+    onError = black,
+    errorContainer = black,
+    onErrorContainer = white,
+    outline = white,
+    outlineVariant = white,
+    scrim = black,
+    surfaceBright = Color.Unspecified,
+    surfaceDim = Color.Unspecified,
+    surfaceContainer = Color.Unspecified,
+    surfaceContainerHigh = Color.Unspecified,
+    surfaceContainerHighest = Color.Unspecified,
+    surfaceContainerLow = Color.Unspecified,
+    surfaceContainerLowest = Color.Unspecified,
+)
