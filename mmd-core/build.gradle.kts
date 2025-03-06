@@ -1,10 +1,11 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
     `maven-publish`
 }
 
@@ -20,9 +21,7 @@ kotlin {
         publishLibraryVariants("release")
 
         compilations.all {
-            kotlinOptions {
-                kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-            }
+            kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
 
@@ -33,16 +32,12 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.androidx.compose.ui)
+                implementation(libs.androidx.compose.material3)
+                implementation(libs.androidx.compose.ui.tooling)
+                implementation(libs.androidx.activity.compose)
             }
         }
-    }
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs =
-            freeCompilerArgs + listOf("-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
-        jvmTarget = "17"
     }
 }
 
@@ -61,6 +56,13 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        compose = true
+        composeOptions {
+            kotlinCompilerExtensionVersion = "${properties["version.compose.extensions"]}"
+        }
     }
 }
 
