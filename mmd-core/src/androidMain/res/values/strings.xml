@@ -1,0 +1,13 @@
+<resources>
+    <string name="date_picker_input_date_not_match_pattern">Date does not match expected pattern: %1$s</string>
+    <string name="date_picker_input_date_out_of_range">Date out of expected year range: %1$s - %2$s</string>
+    <string name="date_picker_input_date_not_allowed">Date not allowed: %1$s</string>
+    <string name="date_picker_input_date">Date</string>
+    <string name="date_picker_select_date">Select date</string>
+    <string name="date_picker_none">None</string>
+    <string name="date_picker_selected_date_mode">Selected date</string>
+    <string name="date_picker_entered_date_mode">Entered date</string>
+    <string name="date_picker_current_selection">Current selection: %1$s</string>
+    <string name="date_picker_entered_date">Entered date: %1$s</string>
+    <string name="date_picker_today">Today</string>
+</resources>

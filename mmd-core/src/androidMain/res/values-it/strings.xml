@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="date_picker_input_date_not_match_pattern">La data non corrisponde al formato previsto: %1$s</string>
+    <string name="date_picker_input_date_out_of_range">La data è fuori dall\'intervallo di anni previsto: %1$s - %2$s</string>
+    <string name="date_picker_input_date_not_allowed">Data non consentita: %1$s</string>
+    <string name="date_picker_input_date">Data</string>
+    <string name="date_picker_select_date">Seleziona data</string>
+    <string name="date_picker_none">Nessuno</string>
+    <string name="date_picker_selected_date_mode">Data selezionata</string>
+    <string name="date_picker_entered_date_mode">Data inserita</string>
+    <string name="date_picker_current_selection">Selezione attuale: %1$s</string>
+    <string name="date_picker_entered_date">Data inserita: %1$s</string>
+    <string name="date_picker_today">Oggi</string>
+</resources>
