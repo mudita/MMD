@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="date_picker_input_date_not_match_pattern">Datum komt niet overeen met het verwachte patroon: %1$s</string>
+    <string name="date_picker_input_date_out_of_range">Datum valt buiten het verwachte jaartalbereik: %1$s - %2$s</string>
+    <string name="date_picker_input_date_not_allowed">Datum niet toegestaan: %1$s</string>
+    <string name="date_picker_input_date">Datum</string>
+    <string name="date_picker_select_date">Selecteer datum</string>
+    <string name="date_picker_none">Geen</string>
+    <string name="date_picker_selected_date_mode">Geselecteerde datum</string>
+    <string name="date_picker_entered_date_mode">Ingevoerde datum</string>
+    <string name="date_picker_current_selection">Huidige selectie: %1$s</string>
+    <string name="date_picker_entered_date">Ingevoerde datum: %1$s</string>
+    <string name="date_picker_today">Vandaag</string>
+</resources>
