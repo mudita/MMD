@@ -68,7 +68,7 @@ import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastFirst
 import androidx.compose.ui.util.fastFirstOrNull
-import com.mudita.mmdtest.internal.ProvideContentColorTextStyleMMD
+import com.mudita.mmd.internal.ProvideContentColorTextStyleMMD
 import kotlin.math.roundToInt
 
 /**

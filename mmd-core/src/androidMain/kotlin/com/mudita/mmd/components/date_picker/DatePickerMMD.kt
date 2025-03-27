@@ -113,13 +113,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import com.mudita.mmd.R
+import com.mudita.mmd.internal.ProvideContentColorTextStyleMMD
 import com.mudita.mmd.internal.date_picker.CalendarModelMMD
 import com.mudita.mmd.internal.date_picker.CalendarMonthMMD
 import com.mudita.mmd.internal.date_picker.DateInputContent
 import com.mudita.mmd.internal.date_picker.DateSkeleton
 import com.mudita.mmd.internal.date_picker.DaysInWeek
 import com.mudita.mmd.internal.date_picker.MillisecondsIn24Hours
-import com.mudita.mmd.internal.date_picker.ProvideContentColorTextStyle
 import com.mudita.mmd.internal.date_picker.createCalendarModel
 import com.mudita.mmd.internal.date_picker.defaultLocale
 import com.mudita.mmd.internal.date_picker.formatDateWithSkeleton
@@ -1580,7 +1580,10 @@ internal fun DatePickerHeader(
     ) {
         if (title != null) {
             val textStyle = HeaderSupportingTextFont
-            ProvideContentColorTextStyle(contentColor = titleContentColor, textStyle = textStyle) {
+            ProvideContentColorTextStyleMMD(
+                contentColor = titleContentColor,
+                textStyle = textStyle,
+            ) {
                 Box(contentAlignment = Alignment.BottomStart) { title() }
             }
         }

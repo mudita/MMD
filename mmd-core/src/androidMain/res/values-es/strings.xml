@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--DATA_PICKER-->
     <string name="date_picker_input_date_not_match_pattern">La fecha no coincide con el formato esperado: %1$s</string>
     <string name="date_picker_input_date_out_of_range">La fecha está fuera del rango de años esperado: %1$s - %2$s</string>
     <string name="date_picker_input_date_not_allowed">Fecha no permitida: %1$s</string>
@@ -11,4 +12,9 @@
     <string name="date_picker_current_selection">Selección actual: %1$s</string>
     <string name="date_picker_entered_date">Fecha ingresada: %1$s</string>
     <string name="date_picker_today">Hoy</string>
+
+    <!--BOTTOM_SHEET-->
+    <string name="bottom_sheet_collapse_description">Contraer hoja inferior</string>
+    <string name="bottom_sheet_dismiss_description">Descartar hoja inferior</string>
+    <string name="bottom_sheet_expand_description">Expandir hoja inferior</string>
 </resources>
