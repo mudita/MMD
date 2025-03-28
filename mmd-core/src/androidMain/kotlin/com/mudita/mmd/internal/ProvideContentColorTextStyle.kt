@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mudita.mmdtest.internal
+package com.mudita.mmd.internal
 
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle

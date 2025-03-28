@@ -1,4 +1,5 @@
 <resources>
+    <!--DATA_PICKER-->
     <string name="date_picker_input_date_not_match_pattern">Date does not match expected pattern: %1$s</string>
     <string name="date_picker_input_date_out_of_range">Date out of expected year range: %1$s - %2$s</string>
     <string name="date_picker_input_date_not_allowed">Date not allowed: %1$s</string>
@@ -10,4 +11,9 @@
     <string name="date_picker_current_selection">Current selection: %1$s</string>
     <string name="date_picker_entered_date">Entered date: %1$s</string>
     <string name="date_picker_today">Today</string>
+
+    <!--BOTTOM_SHEET-->
+    <string name="bottom_sheet_collapse_description">Collapse bottom sheet</string>
+    <string name="bottom_sheet_dismiss_description">Dismiss bottom sheet</string>
+    <string name="bottom_sheet_expand_description">Expand bottom sheet</string>
 </resources>
