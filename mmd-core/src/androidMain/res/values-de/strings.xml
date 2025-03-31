@@ -13,6 +13,20 @@
     <string name="date_picker_entered_date">Eingegebenes Datum: %1$s</string>
     <string name="date_picker_today">Heute</string>
 
+    <!--TIME_INPUT-->
+    <string name="time_picker_am">AM</string>
+    <string name="time_picker_hour">Stunde</string>
+    <string name="time_picker_hour_24h_suffix">%1$d Stunden</string>
+    <string name="time_picker_hour_selection">Stunde auswählen</string>
+    <string name="time_picker_hour_suffix">%1$d Uhr</string>
+    <string name="time_picker_hour_text_field">für Stunde</string>
+    <string name="time_picker_minute">Minute</string>
+    <string name="time_picker_minute_selection">Minuten auswählen</string>
+    <string name="time_picker_minute_suffix">%1$d Minuten</string>
+    <string name="time_picker_minute_text_field">für Minuten</string>
+    <string name="time_picker_period_toggle_description">AM oder PM auswählen</string>
+    <string name="time_picker_pm">PM</string>
+
     <!--BOTTOM_SHEET-->
     <string name="bottom_sheet_collapse_description">BottomSheet ausblenden</string>
     <string name="bottom_sheet_dismiss_description">BottomSheet verwerfen</string>
