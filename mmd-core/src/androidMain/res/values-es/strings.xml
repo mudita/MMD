@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">Contraer hoja inferior</string>
     <string name="bottom_sheet_dismiss_description">Descartar hoja inferior</string>
     <string name="bottom_sheet_expand_description">Expandir hoja inferior</string>
+
+    <string name="default_error_msg">"Entrada no válida"</string>
 </resources>

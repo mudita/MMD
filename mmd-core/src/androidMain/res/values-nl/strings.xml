@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">Onderste blad samenvouwen</string>
     <string name="bottom_sheet_dismiss_description">Onderste blad negeren</string>
     <string name="bottom_sheet_expand_description">Onderste blad uitvouwen</string>
+
+    <string name="default_error_msg">"Ongeldige invoer"</string>
 </resources>

@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">Zwiń arkusz dolny</string>
     <string name="bottom_sheet_dismiss_description">Zamknij arkusz dolny</string>
     <string name="bottom_sheet_expand_description">Rozwiń arkusz dolny</string>
+
+    <string name="default_error_msg">"Nieprawidłowe dane"</string>
 </resources>

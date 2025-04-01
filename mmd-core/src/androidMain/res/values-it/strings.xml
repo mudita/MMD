@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">Comprimi foglio inferiore</string>
     <string name="bottom_sheet_dismiss_description">Ignora foglio inferiore</string>
     <string name="bottom_sheet_expand_description">Espandi foglio inferiore</string>
+
+    <string name="default_error_msg">"Input non valido"</string>
 </resources>
