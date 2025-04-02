@@ -1,6 +1,8 @@
 /*
  * Copyright 2021 The Android Open Source Project
  *
+ * Based on Material 3. Modified by Mudita Sp. z o.o.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.mudita.mmd.components.lists
+package com.mudita.mmd.components.lazy
 
 import android.view.ViewTreeObserver
 import androidx.compose.foundation.Canvas
@@ -23,6 +25,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +33,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -37,6 +42,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListLayoutInfo
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -65,6 +71,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mudita.mmd.R
+import com.mudita.mmd.components.lazy.LazyDefaultsMMD.HORIZONTAL_SLIDER_MIN_WIDTH
+import com.mudita.mmd.components.lazy.LazyDefaultsMMD.VERTICAL_SLIDER_MIN_HEIGHT
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.max
@@ -115,7 +123,7 @@ import kotlin.math.min
  * of them to fill the whole minimum size.
  * @param horizontalAlignment the horizontal alignment applied to the items.
  * @param flingBehavior logic describing fling behavior.
- * @param scrollStep the number of items to scroll when the user drags the list.
+ * @param scrollStep the number of items to scroll when the user drags the list. The default value is 4.
  * @param content a block which describes the content. Inside this block you can use methods like
  * [LazyListScope.item] to add a single item or [LazyListScope.items] to add a list of items.
  */
@@ -123,13 +131,13 @@ import kotlin.math.min
 fun LazyColumnMMD(
     modifier: Modifier = Modifier,
     state: LazyListState = rememberLazyListState(),
-    contentPadding: PaddingValues = LazyColumnMMDDefaults.contentPadding,
+    contentPadding: PaddingValues = LazyDefaultsMMD.contentPadding,
     reverseLayout: Boolean = false,
     verticalArrangement: Arrangement.Vertical =
-        LazyColumnMMDDefaults.verticalArrangement(reverseLayout),
-    horizontalAlignment: Alignment.Horizontal = LazyColumnMMDDefaults.horizontalAlignment,
-    flingBehavior: FlingBehavior = LazyColumnMMDDefaults.flignBehavior,
-    scrollStep: Int = LazyColumnMMDDefaults.SCROLL_STEP,
+        LazyDefaultsMMD.verticalArrangement(reverseLayout),
+    horizontalAlignment: Alignment.Horizontal = LazyDefaultsMMD.horizontalAlignment,
+    flingBehavior: FlingBehavior = LazyDefaultsMMD.flignBehavior,
+    scrollStep: Int = LazyDefaultsMMD.SCROLL_STEP,
     content: LazyListScope.() -> Unit,
 ) {
 
@@ -184,7 +192,133 @@ fun LazyColumnMMD(
         }
 
         if (isScrollable) {
-            Scrollbar(
+            VerticalScrollbar(
+                layoutInfo = layoutInfo,
+                listState = state,
+                scope = scope,
+                scrollOnce = { direction ->
+                    val newIdx = (state.firstVisibleItemIndex - direction * scrollStep)
+                        .coerceIn(0, state.layoutInfo.totalItemsCount - 1)
+                    scope.launch { state.scrollToItem(newIdx) }
+                },
+            )
+        }
+    }
+}
+
+/**
+ * The horizontally scrolling list that only composes and lays out the currently visible items.
+ * The [content] block defines a DSL which allows you to emit items of different types. For
+ * example you can use [LazyListScope.item] to add a single item and [LazyListScope.items] to add
+ * a list of items.
+ *
+ *```kotlin
+ * @Composable
+ * fun LazyRowSample(modifier: Modifier) {
+ *     val itemsList = (0..150).toList()
+ *
+ *     LazyRowMMD(modifier = modifier.fillMaxSize()) {
+ *         items(itemsList) {
+ *             Text(
+ *                 "Item $it",
+ *                 textAlign = TextAlign.Center,
+ *                 modifier = Modifier
+ *                     .fillMaxHeight()
+ *                     .wrapContentHeight(Alignment.CenterVertically)
+ *                     .padding(16.dp)
+ *             )
+ *             VerticalDividerMMD(
+ *                 modifier = Modifier.padding(vertical = 16.dp),
+ *             )
+ *         }
+ *     }
+ * }
+ * ```
+ *
+ * @param modifier the modifier to apply to this layout
+ * @param state the state object to be used to control or observe the list's state
+ * @param contentPadding a padding around the whole content. This will add padding for the
+ * content after it has been clipped, which is not possible via [modifier] param. You can use it
+ * to add a padding before the first item or after the last one. If you want to add a spacing
+ * between each item use [horizontalArrangement].
+ * @param reverseLayout reverse the direction of scrolling and layout. When `true`, items are
+ * laid out in the reverse order and [LazyListState.firstVisibleItemIndex] == 0 means
+ * that row is scrolled to the end. Note that [reverseLayout] does not change the behavior of
+ * [horizontalArrangement], e.g. with [Arrangement.Start] [123###] becomes [321###].
+ * @param horizontalArrangement The horizontal arrangement of the layout's children. This allows
+ * to add a spacing between items and specify the arrangement of the items when we have not enough
+ * of them to fill the whole minimum size.
+ * @param verticalAlignment the vertical alignment applied to the items
+ * @param flingBehavior logic describing fling behavior.
+ * @param content a block which describes the content. Inside this block you can use methods like
+ * [LazyListScope.item] to add a single item or [LazyListScope.items] to add a list of items.
+ */
+@Composable
+fun LazyRowMMD(
+    modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = LazyDefaultsMMD.contentPadding,
+    reverseLayout: Boolean = false,
+    horizontalArrangement: Arrangement.Horizontal = LazyDefaultsMMD.horizontalArrangement(
+        reverseLayout,
+    ),
+    verticalAlignment: Alignment.Vertical = LazyDefaultsMMD.verticalAlignment,
+    flingBehavior: FlingBehavior = LazyDefaultsMMD.flignBehavior,
+    scrollStep: Int = LazyDefaultsMMD.SCROLL_STEP,
+    content: LazyListScope.() -> Unit,
+) {
+
+    val scope = rememberCoroutineScope()
+    val layoutInfo by remember { derivedStateOf { state.layoutInfo } }
+    var isDragging by remember { mutableStateOf(false) }
+    val isScrollable by remember {
+        derivedStateOf {
+            val totalWidth =
+                layoutInfo.totalItemsCount * (layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0)
+            val viewportWidth = layoutInfo.viewportEndOffset - layoutInfo.viewportStartOffset
+            totalWidth > viewportWidth
+        }
+    }
+
+    Column(
+        modifier = modifier
+            /**
+             * To enhance the user experience and prevent visual flickering,
+             * the list and scrollbar are rendered only after the list content has fully loaded.
+             * This ensures a smoother and more stable initial display.
+             */
+            .alpha(if (layoutInfo.totalItemsCount > 0) 1f else 0f),
+    ) {
+        LazyRow(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures(
+                        onDragEnd = { isDragging = false },
+                    ) { _, dragAmount ->
+                        if (!isDragging && isScrollable) {
+                            isDragging = true
+                            val direction = if (dragAmount > 0) -1 else 1
+                            val newIdx = (state.firstVisibleItemIndex + direction * scrollStep)
+                                .coerceIn(0, layoutInfo.totalItemsCount - 1)
+                            scope.launch { state.scrollToItem(newIdx) }
+                        }
+                    }
+                },
+            state = state,
+            contentPadding = contentPadding,
+            reverseLayout = reverseLayout,
+            horizontalArrangement = horizontalArrangement,
+            verticalAlignment = verticalAlignment,
+            flingBehavior = flingBehavior,
+            userScrollEnabled = false,
+        ) {
+            content()
+        }
+
+        if (isScrollable) {
+            HorizontalScrollbar(
                 layoutInfo = layoutInfo,
                 listState = state,
                 scope = scope,
@@ -200,7 +334,7 @@ fun LazyColumnMMD(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun Scrollbar(
+private fun VerticalScrollbar(
     modifier: Modifier = Modifier,
     scope: CoroutineScope,
     layoutInfo: LazyListLayoutInfo,
@@ -210,8 +344,8 @@ private fun Scrollbar(
     if (layoutInfo.totalItemsCount == 0)
         return
 
-    val containerColor = LazyColumnMMDDefaults.containerSliderColor
-    val sliderColor = LazyColumnMMDDefaults.sliderColor
+    val containerColor = LazyDefaultsMMD.containerSliderColor
+    val sliderColor = LazyDefaultsMMD.sliderColor
 
     val view = LocalView.current
     var isKeyboardOpen by remember { mutableStateOf(false) }
@@ -219,7 +353,8 @@ private fun Scrollbar(
     DisposableEffect(Unit) {
         val keyboardListener = ViewTreeObserver.OnGlobalLayoutListener {
             isKeyboardOpen =
-                ViewCompat.getRootWindowInsets(view)?.isVisible(WindowInsetsCompat.Type.ime()) ?: true
+                ViewCompat.getRootWindowInsets(view)?.isVisible(WindowInsetsCompat.Type.ime())
+                    ?: true
         }
         view.viewTreeObserver.addOnGlobalLayoutListener(keyboardListener)
         onDispose { view.viewTreeObserver.removeOnGlobalLayoutListener(keyboardListener) }
@@ -245,7 +380,7 @@ private fun Scrollbar(
             contentDescription = null,
             modifier = Modifier
                 .padding(vertical = 16.dp)
-                .size(LazyColumnMMDDefaults.navigateIconSize)
+                .size(LazyDefaultsMMD.navigateIconSize)
                 .combinedClickable(
                     onClick = { scrollOnce(1) },
                     onLongClick = { scope.launch { listState.scrollToItem(0) } },
@@ -254,12 +389,12 @@ private fun Scrollbar(
 
         Canvas(
             modifier = Modifier
-                .width(LazyColumnMMDDefaults.sliderBackgroundWidth)
+                .width(LazyDefaultsMMD.sliderBackgroundWidth)
                 .weight(1f)
                 .border(
-                    width = LazyColumnMMDDefaults.sliderBackgroundBorderWidth,
+                    width = LazyDefaultsMMD.sliderBackgroundBorderWidth,
                     color = sliderColor,
-                    shape = LazyColumnMMDDefaults.sliderBackgroundCorners,
+                    shape = LazyDefaultsMMD.sliderBackgroundCorners,
                 )
                 .pointerInput(listState.maxValue) {
                     detectTapGestures { offset ->
@@ -280,7 +415,7 @@ private fun Scrollbar(
 
             val sliderHeight =
                 size.height * (visibleCount.toFloat() / layoutInfo.totalItemsCount.toFloat())
-            val minSliderHeight = max(size.height * 0.05f, LazyColumnMMDDefaults.SLIDER_MIN_HEIGHT)
+            val minSliderHeight = max(size.height * 0.05f, VERTICAL_SLIDER_MIN_HEIGHT)
             val adjustedSliderHeight = sliderHeight.coerceAtLeast(minSliderHeight)
 
             val firstVisible = if (isFirstItemFullyVisible) firstVisibleIdx else min(
@@ -301,7 +436,7 @@ private fun Scrollbar(
                 color = containerColor,
                 topLeft = Offset.Zero,
                 size = Size(size.width, size.height),
-                cornerRadius = LazyColumnMMDDefaults.cornerRadius(size),
+                cornerRadius = LazyDefaultsMMD.cornerRadius(size),
             )
 
             // Draw the slider
@@ -309,7 +444,7 @@ private fun Scrollbar(
                 color = if (visibleCount >= layoutInfo.totalItemsCount) containerColor else sliderColor,
                 topLeft = Offset(0f, sliderOffset),
                 size = Size(size.width, adjustedSliderHeight),
-                cornerRadius = LazyColumnMMDDefaults.cornerRadius(size),
+                cornerRadius = LazyDefaultsMMD.cornerRadius(size),
             )
         }
 
@@ -318,7 +453,7 @@ private fun Scrollbar(
             contentDescription = null,
             modifier = Modifier
                 .padding(vertical = 16.dp)
-                .size(LazyColumnMMDDefaults.navigateIconSize)
+                .size(LazyDefaultsMMD.navigateIconSize)
                 .combinedClickable(
                     onClick = { scrollOnce(-1) },
                     onLongClick = { scope.launch { listState.scrollToItem(layoutInfo.totalItemsCount - 1) } },
@@ -327,11 +462,125 @@ private fun Scrollbar(
     }
 }
 
-object LazyColumnMMDDefaults {
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun HorizontalScrollbar(
+    modifier: Modifier = Modifier,
+    scope: CoroutineScope,
+    layoutInfo: LazyListLayoutInfo,
+    listState: LazyListState,
+    scrollOnce: (direction: Int) -> Unit,
+) {
+    if (layoutInfo.totalItemsCount == 0) return
+
+    val containerColor = LazyDefaultsMMD.containerSliderColor
+    val sliderColor = LazyDefaultsMMD.sliderColor
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        val firstVisibleIdx = layoutInfo.visibleItemsInfo.firstOrNull()?.index ?: 0
+        val lastVisibleIdx = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+        val viewportWidth = layoutInfo.viewportEndOffset + layoutInfo.viewportStartOffset
+        val isFirstItemFullyVisible = layoutInfo.visibleItemsInfo.first().offset >= 0
+        val isAtListStart = firstVisibleIdx == 0 && isFirstItemFullyVisible
+        val isLastItemFullyVisible =
+            layoutInfo.visibleItemsInfo.last().offset + layoutInfo.visibleItemsInfo.last().size <= viewportWidth
+        val isAtListEnd = lastVisibleIdx == layoutInfo.totalItemsCount - 1 && isLastItemFullyVisible
+
+        Icon(
+            painter = painterResource(if (isAtListStart) R.drawable.chevron_dotted_left else R.drawable.chevron_filled_left),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .size(LazyDefaultsMMD.navigateIconSize)
+                .combinedClickable(
+                    onClick = { scrollOnce(1) },
+                    onLongClick = { scope.launch { listState.scrollToItem(0) } },
+                ),
+        )
+
+        Canvas(
+            modifier = Modifier
+                .height(LazyDefaultsMMD.sliderBackgroundWidth)
+                .weight(1f)
+                .border(
+                    width = LazyDefaultsMMD.sliderBackgroundBorderWidth,
+                    color = sliderColor,
+                    shape = LazyDefaultsMMD.sliderBackgroundCorners,
+                )
+                .pointerInput(listState.maxValue) {
+                    detectTapGestures { offset ->
+                        val visibleCount = layoutInfo.visibleItemsInfo.size
+                        val sliderWidth = size.width * visibleCount / layoutInfo.totalItemsCount
+                        val adjustedOffset = offset.x - (sliderWidth / 2)
+                        val targetIndex =
+                            (adjustedOffset / size.width * layoutInfo.totalItemsCount).toInt()
+                                .coerceIn(0, layoutInfo.totalItemsCount - 1)
+                        scope.launch { listState.scrollToItem(targetIndex) }
+                    }
+                },
+        ) {
+            var visibleCount = lastVisibleIdx - firstVisibleIdx + 1
+            if (!isLastItemFullyVisible || !isFirstItemFullyVisible) visibleCount--
+
+            val sliderWidth =
+                size.width * (visibleCount.toFloat() / layoutInfo.totalItemsCount.toFloat())
+            val minSliderWidth = max(size.width * 0.05f, HORIZONTAL_SLIDER_MIN_WIDTH)
+            val adjustedSliderWidth = sliderWidth.coerceAtLeast(minSliderWidth)
+
+            val firstVisible = if (isFirstItemFullyVisible) firstVisibleIdx else min(
+                firstVisibleIdx + 1,
+                layoutInfo.totalItemsCount - visibleCount,
+            )
+
+            val maxOffset = size.width - adjustedSliderWidth
+            val sliderOffset =
+                ((firstVisible.toFloat() / (layoutInfo.totalItemsCount - visibleCount)) * maxOffset)
+                    .coerceIn(0f, maxOffset)
+
+            drawRoundRect(
+                color = containerColor,
+                topLeft = Offset.Zero,
+                size = Size(size.width, size.height),
+                cornerRadius = LazyDefaultsMMD.cornerRadius(size),
+            )
+
+            drawRoundRect(
+                color = if (visibleCount >= layoutInfo.totalItemsCount) containerColor else sliderColor,
+                topLeft = Offset(sliderOffset, 0f),
+                size = Size(adjustedSliderWidth, size.height),
+                cornerRadius = LazyDefaultsMMD.cornerRadius(size),
+            )
+        }
+
+        Icon(
+            painter = painterResource(if (isAtListEnd) R.drawable.chevron_dotted_right else R.drawable.chevron_filled_right),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .size(LazyDefaultsMMD.navigateIconSize)
+                .combinedClickable(
+                    onClick = { scrollOnce(-1) },
+                    onLongClick = { scope.launch { listState.scrollToItem(layoutInfo.totalItemsCount - 1) } },
+                ),
+        )
+    }
+}
+
+object LazyDefaultsMMD {
     /**
-     * The minimum height of the slider in the scrollbar.
+     * The minimum height of the horizontal slider in the scrollbar.
      */
-    const val SLIDER_MIN_HEIGHT = 16f
+    const val VERTICAL_SLIDER_MIN_HEIGHT = 16f
+
+    /**
+     * The minimum width of the vertical slider in the scrollbar.
+     */
+    const val HORIZONTAL_SLIDER_MIN_WIDTH = 16f
 
     /**
      * The number of items to scroll when the user drags the list.
@@ -355,10 +604,21 @@ object LazyColumnMMDDefaults {
     val horizontalAlignment: Alignment.Horizontal = Alignment.Start
 
     /**
+     * The default vertical alignment applied to the items.
+     */
+    val verticalAlignment: Alignment.Vertical = Alignment.Top
+
+    /**
      * The default vertical arrangement of the layout's children.
      */
     fun verticalArrangement(reverseLayout: Boolean): Arrangement.Vertical =
         if (reverseLayout) Arrangement.Bottom else Arrangement.Top
+
+    /**
+     * The default horizontal arrangement of the layout's children.
+     */
+    fun horizontalArrangement(reverseLayout: Boolean): Arrangement.Horizontal =
+        if (!reverseLayout) Arrangement.Start else Arrangement.End
 
     /**
      * The default corner radius for the slider.
@@ -391,12 +651,12 @@ object LazyColumnMMDDefaults {
     /**
      * The default border width of the slider background.
      */
-    internal val sliderBackgroundBorderWidth: Dp = 1.dp
+    val sliderBackgroundBorderWidth: Dp = 1.dp
 
     /**
      * The default corners of the slider background.
      */
-    internal val sliderBackgroundCorners: Shape = RoundedCornerShape(4.dp)
+    val sliderBackgroundCorners: Shape = RoundedCornerShape(4.dp)
 }
 
 internal val LazyListState.maxValue
