@@ -41,6 +41,6 @@ val eInkColorScheme = ColorScheme(
     surfaceContainer = Color.Unspecified,
     surfaceContainerHigh = Color.Unspecified,
     surfaceContainerHighest = Color.Unspecified,
-    surfaceContainerLow = Color.Unspecified,
+    surfaceContainerLow = white,
     surfaceContainerLowest = Color.Unspecified,
 )

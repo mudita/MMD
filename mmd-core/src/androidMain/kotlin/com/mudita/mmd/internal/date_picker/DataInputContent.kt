@@ -47,9 +47,9 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.R
-import com.mudita.mmd.components.date_picker.DatePickerColorsMMD
-import com.mudita.mmd.components.date_picker.DatePickerFormatterMMD
-import com.mudita.mmd.components.date_picker.SelectableDatesMMD
+import com.mudita.mmd.components.time.DatePickerColorsMMD
+import com.mudita.mmd.components.time.DatePickerFormatterMMD
+import com.mudita.mmd.components.time.SelectableDatesMMD
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

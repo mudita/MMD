@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mudita.mmd.components.date_picker
+package com.mudita.mmd.components.time
 
 import androidx.compose.animation.core.DecayAnimationSpec
 import androidx.compose.animation.core.Spring
