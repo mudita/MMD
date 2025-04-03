@@ -30,4 +30,6 @@
     <string name="bottom_sheet_collapse_description">Collapse bottom sheet</string>
     <string name="bottom_sheet_dismiss_description">Dismiss bottom sheet</string>
     <string name="bottom_sheet_expand_description">Expand bottom sheet</string>
+
+    <string name="default_error_msg">"Invalid input"</string>
 </resources>

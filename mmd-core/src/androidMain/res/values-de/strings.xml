@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">BottomSheet ausblenden</string>
     <string name="bottom_sheet_dismiss_description">BottomSheet verwerfen</string>
     <string name="bottom_sheet_expand_description">BottomSheet einblenden</string>
+
+    <string name="default_error_msg">"Ungültige Eingabe"</string>
 </resources>

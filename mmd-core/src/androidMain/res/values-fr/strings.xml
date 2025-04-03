@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">Réduire la feuille inférieure</string>
     <string name="bottom_sheet_dismiss_description">Fermer la feuille inférieure</string>
     <string name="bottom_sheet_expand_description">Développer la feuille inférieure</string>
+
+    <string name="default_error_msg">"Entrée invalide"</string>
 </resources>

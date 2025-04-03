@@ -31,4 +31,6 @@
     <string name="bottom_sheet_collapse_description">Reduzir folha inferior</string>
     <string name="bottom_sheet_dismiss_description">Ignorar folha inferior</string>
     <string name="bottom_sheet_expand_description">Expandir folha inferior</string>
+
+    <string name="default_error_msg">"Entrada inválida"</string>
 </resources>
