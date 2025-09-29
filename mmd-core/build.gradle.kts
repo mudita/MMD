@@ -1,6 +1,3 @@
-import java.io.FileInputStream
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
@@ -10,15 +7,19 @@ plugins {
     `maven-publish`
 }
 
-group = "${properties["library.group"]}"
+group = properties["library.group"].toString()
 version =
     run {
         System.getenv("GITHUB_REF_NAME")?.removePrefix("release.")
-            ?: "${properties["library.version"]}"
+            ?: properties["library.version"].toString()
     }
 
 kotlin {
-    android {
+    androidTarget {
+        mavenPublication {
+            artifactId = properties["library.artifactId"].toString()
+        }
+
         publishLibraryVariants("release")
 
         compilations.all {
@@ -27,9 +28,6 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {}
-        }
         val androidMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
@@ -43,11 +41,11 @@ kotlin {
 }
 
 android {
-    namespace = "${properties["library.namespace"]}"
-    compileSdk = "${properties["library.compileSdk"]}".toInt()
+    namespace = properties["library.namespace"].toString()
+    compileSdk = properties["library.compileSdk"].toString().toInt()
     defaultConfig {
-        minSdk = "${properties["library.minSdk"]}".toInt()
-        targetSdk = "${properties["library.targetSdk"]}".toInt()
+        minSdk = properties["library.minSdk"].toString().toInt()
+        targetSdk = properties["library.targetSdk"].toString().toInt()
     }
 
     buildTypes {
@@ -62,32 +60,7 @@ android {
     buildFeatures {
         compose = true
         composeOptions {
-            kotlinCompilerExtensionVersion = "${properties["version.compose.extensions"]}"
-        }
-    }
-}
-
-publishing {
-    repositories {
-        maven {
-            val properties = Properties()
-            runCatching {
-                val inputStream = FileInputStream("local.properties")
-                properties.load(inputStream)
-            }.onFailure {
-                println("WARNING: Could not find `local.properties` file")
-            }
-
-            val repoUrl = properties["url"] ?: System.getenv("ARTIFACTORY_URL")
-            val repoUsername = properties["username"] ?: System.getenv("ARTIFACTORY_USERNAME")
-            val repoPassword = properties["password"] ?: System.getenv("ARTIFACTORY_PASSWORD")
-
-            setUrl(repoUrl)
-
-            credentials {
-                username = repoUsername?.toString()
-                password = repoPassword?.toString()
-            }
+            kotlinCompilerExtensionVersion = properties["version.compose.extensions"].toString()
         }
     }
 }
