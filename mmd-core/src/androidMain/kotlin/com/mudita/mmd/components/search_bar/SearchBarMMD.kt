@@ -1,5 +1,8 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ *
+ * Copyright 2025 The Android Open Source Project
+ *
+ * Based on Material 3. Modified by Mudita Sp. z o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,6 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package com.mudita.mmd.components.search_bar
@@ -86,8 +90,6 @@ import com.mudita.mmd.components.search_bar.SearchBarDefaultsMMD.SearchBarImpl
 import com.mudita.mmd.components.search_bar.SearchBarDefaultsMMD.inputFieldShape
 import com.mudita.mmd.components.text_field.TextFieldColors
 import com.mudita.mmd.components.text_field.TextFieldDefaultsMMD
-import com.mudita.mmdtest.components.search.MutableWindowInsets
-import com.mudita.mmdtest.components.search.PredictiveBack
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
 import kotlin.math.max
