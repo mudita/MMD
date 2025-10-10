@@ -1,11 +1,11 @@
 # Mudita Mindful Design (MMD)
 
-A UI component library optimized for e‑ink displays on Android, built on top of Jetpack Compose Material 3 guidelines and classes. Our goal is to provide a consistent, predictable set of components that respects Material Design while addressing the specifics of e‑ink displays.
+A UI component library optimized for E Ink® displays on Android, built on top of Jetpack Compose Material 3 guidelines and classes. Our goal is to provide a consistent, predictable set of components that respects Material Design while addressing the specifics of E Ink® displays.
 
-> We intentionally rely on Material Design (Material 3) classes and patterns. This is by design and a good practice. It keeps us aligned with the Android ecosystem while adapting behavior and styling to e‑ink.
+> We intentionally rely on Material Design (Material 3) classes and patterns. This is by design and a good practice. It keeps us aligned with the Android ecosystem while adapting behavior and styling to E Ink®.
 
-## Why e‑ink?
-E‑ink displays differ from standard LCD/OLED:
+## Why E Ink®?
+E Ink® displays differ from standard LCD/OLED:
 - slower refresh rates and potential ghosting/afterimage,
 - limited color palette (often grayscale),
 - great daylight readability with low power consumption,
@@ -14,9 +14,9 @@ E‑ink displays differ from standard LCD/OLED:
 MMD minimizes flicker, reduces unnecessary animations, and simplifies color and typography to make the UI readable and energy‑efficient.
 
 ## Features
-- **E‑ink optimized**: default color scheme, typography, and interaction patterns for e‑ink.
+- **E Ink® optimized**: default color scheme, typography, and interaction patterns for E Ink®.
 - **Material Design 3‑based**: integration with `MaterialTheme` and compatibility with M3 components.
-- **Ripple disabled**: ripple effects are turned off by default for better UX on e‑ink.
+- **Ripple disabled**: ripple effects are turned off by default for better UX on E Ink®.
 - **Consistent typography**: ready‑to‑use `eInkTypography` and `eInkColorScheme` (monochromatic).
 - **Component set**: buttons, text fields, switches, tabs, app bars, and more.
 
@@ -28,7 +28,7 @@ dependencies {
 ```
 
 ## Configuration and theming
-Enable the MMD theme in your Compose tree. By default, it applies an e‑ink‑friendly color scheme and typography and disables ripple effects globally.
+Enable the MMD theme in your Compose tree. By default, it applies an E Ink®‑friendly color scheme and typography and disables ripple effects globally.
 
 ```kotlin
 import com.mudita.mmd.components.buttons.ButtonMMD
@@ -39,14 +39,14 @@ import com.mudita.mmd.ThemeMMD
 fun App() {
     ThemeMMD {
         ButtonMMD(onClick = { /* ... */ }) {
-            TextMMD("Hello e‑ink")
+            TextMMD("Hello E Ink®")
         }
     }
 }
 ```
 
 ## Using components
-MMD works well with both Material 3 components and MMD‑provided components. Use our components where they bring e‑ink optimizations; otherwise, standard M3 components will remain consistent via theming.
+MMD works well with both Material 3 components and MMD‑provided components. Use our components where they bring E Ink® optimizations; otherwise, standard M3 components will remain consistent via theming.
 
 ```kotlin
 import com.mudita.mmd.components.buttons.ButtonMMD
@@ -63,11 +63,11 @@ fun Screen() {
 > Component names may vary by module and version. Explore `com.mudita.mmd.components.*` in your IDE for the full list and API.
 
 ## Accessibility and readability
-- contrast and font sizes tuned for e‑ink,
+- contrast and font sizes tuned for E Ink®,
 - avoid animations/effects that reduce readability,
 - utilities to support accessibility (e.g., unified text styles).
 
-## Performance on e‑ink – best practices
+## Performance on E Ink® – best practices
 - limit animations, auto‑refresh, and fancy transitions,
 - avoid frequent state changes leading to redraws,
 - prefer monochrome graphics and simple shapes,
