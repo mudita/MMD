@@ -103,7 +103,7 @@ fun CircularProgressIndicatorMMD(
     }
 }
 
-private object ProgressIndicatorDefaultsMMD {
+object ProgressIndicatorDefaultsMMD {
     const val ANIMATION_STEP_DEGREES = 45f
     const val STROKE_DEGREES = 360
 

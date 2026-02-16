@@ -30,7 +30,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.mudita.mmd.components.tooltip.CaretDirection.Down
+import com.mudita.mmd.components.tooltip.CaretDirectionMMD.Down
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

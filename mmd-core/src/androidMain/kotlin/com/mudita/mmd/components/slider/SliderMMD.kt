@@ -1286,7 +1286,7 @@ private enum class SliderComponents {
 @Suppress("DEPRECATION")
 @Deprecated("Not necessary with the introduction of Slider state")
 @Stable
-class SliderPositions(
+class SliderPositionsMMD(
     initialActiveRange: ClosedFloatingPointRange<Float> = 0f..1f,
     initialTickFractions: FloatArray = floatArrayOf(),
 ) {
@@ -1307,7 +1307,7 @@ class SliderPositions(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is SliderPositions) return false
+        if (other !is SliderPositionsMMD) return false
 
         if (activeRange != other.activeRange) return false
         if (!tickFractions.contentEquals(other.tickFractions)) return false

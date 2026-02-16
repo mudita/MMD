@@ -272,7 +272,7 @@ fun DropdownMenuMMD(
  * @param enabled controls the enabled state of this menu item. When `false`, this component will
  *   not respond to user input, and it will appear visually disabled and disabled to accessibility
  *   services.
- * @param colors [MenuItemColors] that will be used to resolve the colors used for this menu item in
+ * @param colors [MenuItemColorsMMD] that will be used to resolve the colors used for this menu item in
  *   different states. See [MenuDefaultsMMD.itemColors].
  * @param contentPadding the padding applied to the content of this menu item
  * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
@@ -288,7 +288,7 @@ fun DropdownMenuItemMMD(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     enabled: Boolean = true,
-    colors: MenuItemColors = MenuDefaultsMMD.itemColors(),
+    colors: MenuItemColorsMMD = MenuDefaultsMMD.itemColors(),
     contentPadding: PaddingValues = MenuDefaultsMMD.DropdownMenuItemContentPadding,
     interactionSource: MutableInteractionSource? = null,
 ) {
@@ -326,14 +326,14 @@ object MenuDefaultsMMD {
         @Composable get() = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
 
     /**
-     * Creates a [MenuItemColors] that represents the default text and icon colors used in a
+     * Creates a [MenuItemColorsMMD] that represents the default text and icon colors used in a
      * [DropdownMenuItemContent].
      */
     @Composable
     fun itemColors() = defaultMenuItemColors
 
     /**
-     * Creates a [MenuItemColors] that represents the default text and icon colors used in a
+     * Creates a [MenuItemColorsMMD] that represents the default text and icon colors used in a
      * [DropdownMenuItemContent].
      *
      * @param textColor the text color of this [DropdownMenuItemContent] when enabled
@@ -354,7 +354,7 @@ object MenuDefaultsMMD {
         disabledTextColor: Color = Color.Unspecified,
         disabledLeadingIconColor: Color = Color.Unspecified,
         disabledTrailingIconColor: Color = Color.Unspecified,
-    ): MenuItemColors =
+    ): MenuItemColorsMMD =
         defaultMenuItemColors.copy(
             textColor = textColor,
             leadingIconColor = leadingIconColor,
@@ -364,8 +364,8 @@ object MenuDefaultsMMD {
             disabledTrailingIconColor = disabledTrailingIconColor,
         )
 
-    private val defaultMenuItemColors: MenuItemColors
-        @Composable get() = MenuItemColors(
+    private val defaultMenuItemColors: MenuItemColorsMMD
+        @Composable get() = MenuItemColorsMMD(
             textColor = MaterialTheme.colorScheme.onSurface,
             leadingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
             trailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -399,7 +399,7 @@ internal val DefaultMenuProperties: PopupProperties = PopupProperties(focusable 
  *   default colors used in a [DropdownMenuItemContent].
  */
 @Immutable
-class MenuItemColors(
+class MenuItemColorsMMD(
     val textColor: Color,
     val leadingIconColor: Color,
     val trailingIconColor: Color,
@@ -420,7 +420,7 @@ class MenuItemColors(
         disabledLeadingIconColor: Color = this.disabledLeadingIconColor,
         disabledTrailingIconColor: Color = this.disabledTrailingIconColor,
     ) =
-        MenuItemColors(
+        MenuItemColorsMMD(
             textColor.takeOrElse { this.textColor },
             leadingIconColor.takeOrElse { this.leadingIconColor },
             trailingIconColor.takeOrElse { this.trailingIconColor },
@@ -457,7 +457,7 @@ class MenuItemColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is MenuItemColors) return false
+        if (other == null || other !is MenuItemColorsMMD) return false
 
         if (textColor != other.textColor) return false
         if (leadingIconColor != other.leadingIconColor) return false
@@ -516,7 +516,7 @@ internal fun DropdownMenuItemContent(
     leadingIcon: @Composable (() -> Unit)?,
     trailingIcon: @Composable (() -> Unit)?,
     enabled: Boolean,
-    colors: MenuItemColors,
+    colors: MenuItemColorsMMD,
     contentPadding: PaddingValues,
     interactionSource: MutableInteractionSource?
 ) {

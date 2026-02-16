@@ -539,14 +539,22 @@ object NavigationBarItemDefaultsMMD {
      * specification.
      */
     @Composable
-    fun colors() = NavigationBarItemColors(
-        selectedIconColor = MaterialTheme.colorScheme.onSurface,
-        selectedTextColor = MaterialTheme.colorScheme.onSurface,
-        selectedIndicatorColor = MaterialTheme.colorScheme.onSurface,
-        unselectedIconColor = MaterialTheme.colorScheme.onSurface,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurface,
-        disabledIconColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
-        disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
+    fun colors(
+        selectedIconColor: Color = MaterialTheme.colorScheme.onSurface,
+        selectedTextColor: Color = MaterialTheme.colorScheme.onSurface,
+        selectedIndicatorColor: Color = MaterialTheme.colorScheme.onSurface,
+        unselectedIconColor: Color = MaterialTheme.colorScheme.onSurface,
+        unselectedTextColor: Color = MaterialTheme.colorScheme.onSurface,
+        disabledIconColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
+        disabledTextColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f)
+    ) = NavigationBarItemColors(
+        selectedIconColor = selectedIconColor,
+        selectedTextColor = selectedTextColor,
+        selectedIndicatorColor = selectedIndicatorColor,
+        unselectedIconColor = unselectedIconColor,
+        unselectedTextColor = unselectedTextColor,
+        disabledIconColor = disabledIconColor,
+        disabledTextColor = disabledTextColor
     )
 
     /**

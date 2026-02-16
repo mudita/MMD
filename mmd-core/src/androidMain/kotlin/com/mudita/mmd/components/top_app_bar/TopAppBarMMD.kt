@@ -163,13 +163,18 @@ object TopAppBarDefaultsMMD {
      * between the provided colors according to the Material Design specification.
      */
     @Composable
-    fun topAppBarColors() =
+    fun topAppBarColors(
+        containerColor: Color = MaterialTheme.colorScheme.surface,
+        scrolledContainerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
+        navigationIconContentColor: Color = MaterialTheme.colorScheme.onSurface,
+        titleContentColor: Color = MaterialTheme.colorScheme.onSurface
+    ) =
         TopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-            scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-            navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
-            titleContentColor = MaterialTheme.colorScheme.onSurface,
-            actionIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            containerColor = containerColor,
+            scrolledContainerColor = scrolledContainerColor,
+            navigationIconContentColor = navigationIconContentColor,
+            titleContentColor = navigationIconContentColor,
+            actionIconContentColor = titleContentColor,
         )
 
     /** Default divider colors used by a [TopAppBarMMD] */

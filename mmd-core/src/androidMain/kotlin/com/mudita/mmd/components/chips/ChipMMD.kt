@@ -110,9 +110,9 @@ import com.mudita.mmd.components.text_field.widthOrZero
  * @param trailingIcon optional icon at the end of the chip
  * @param shape defines the shape of this chip's container, border (when [border] is not null), and
  *   shadow (when using [elevation])
- * @param colors [ChipColors] that will be used to resolve the colors used for this chip in
+ * @param colors [ChipColorsMMD] that will be used to resolve the colors used for this chip in
  *   different states. See [AssistChipDefaultsMMD.assistChipColors].
- * @param elevation [ChipElevation] used to resolve the elevation for this chip in different states.
+ * @param elevation [ChipElevationMMD] used to resolve the elevation for this chip in different states.
  *   This controls the size of the shadow below the chip. Additionally, when the container color is
  *   [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
  *   [AssistChipDefaultsMMD.assistChipElevation].
@@ -132,8 +132,8 @@ fun AssistChipMMD(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     shape: Shape = AssistChipDefaultsMMD.shape,
-    colors: ChipColors = AssistChipDefaultsMMD.assistChipColors(),
-    elevation: ChipElevation? = AssistChipDefaultsMMD.assistChipElevation(),
+    colors: ChipColorsMMD = AssistChipDefaultsMMD.assistChipColors(),
+    elevation: ChipElevationMMD? = AssistChipDefaultsMMD.assistChipElevation(),
     border: BorderStroke? = AssistChipDefaultsMMD.assistChipBorder(enabled),
     interactionSource: MutableInteractionSource? = null,
 ) =
@@ -212,9 +212,9 @@ fun AssistChipMMD(
  * @param trailingIcon optional icon at the end of the chip
  * @param shape defines the shape of this chip's container, border (when [border] is not null), and
  *   shadow (when using [elevation])
- * @param colors [SelectableChipColors] that will be used to resolve the colors used for this chip
+ * @param colors [SelectableChipColorsMMD] that will be used to resolve the colors used for this chip
  *   in different states. See [FilterChipDefaultsMMD.filterChipColors].
- * @param elevation [SelectableChipElevation] used to resolve the elevation for this chip in
+ * @param elevation [SelectableChipElevationMMD] used to resolve the elevation for this chip in
  *   different states. This controls the size of the shadow below the chip. Additionally, when the
  *   container color is [ColorScheme.surface], this controls the amount of primary color applied as
  *   an overlay. See [FilterChipDefaultsMMD.filterChipElevation].
@@ -235,8 +235,8 @@ fun FilterChipMMD(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     shape: Shape = FilterChipDefaultsMMD.shape,
-    colors: SelectableChipColors = FilterChipDefaultsMMD.filterChipColors(),
-    elevation: SelectableChipElevation? = FilterChipDefaultsMMD.filterChipElevation(),
+    colors: SelectableChipColorsMMD = FilterChipDefaultsMMD.filterChipColors(),
+    elevation: SelectableChipElevationMMD? = FilterChipDefaultsMMD.filterChipElevation(),
     border: BorderStroke? = FilterChipDefaultsMMD.filterChipBorder(enabled, selected),
     interactionSource: MutableInteractionSource? = null,
 ) =
@@ -320,9 +320,9 @@ fun FilterChipMMD(
  * @param trailingIcon optional icon at the end of the chip
  * @param shape defines the shape of this chip's container, border (when [border] is not null), and
  *   shadow (when using [elevation])
- * @param colors [ChipColors] that will be used to resolve the colors used for this chip in
+ * @param colors [ChipColorsMMD] that will be used to resolve the colors used for this chip in
  *   different states. See [InputChipDefaultsMMD.inputChipColors].
- * @param elevation [ChipElevation] used to resolve the elevation for this chip in different states.
+ * @param elevation [ChipElevationMMD] used to resolve the elevation for this chip in different states.
  *   This controls the size of the shadow below the chip. Additionally, when the container color is
  *   [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
  *   [InputChipDefaultsMMD.inputChipElevation].
@@ -344,8 +344,8 @@ fun InputChipMMD(
     avatar: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     shape: Shape = InputChipDefaultsMMD.shape,
-    colors: SelectableChipColors = InputChipDefaultsMMD.inputChipColors(),
-    elevation: SelectableChipElevation? = InputChipDefaultsMMD.inputChipElevation(),
+    colors: SelectableChipColorsMMD = InputChipDefaultsMMD.inputChipColors(),
+    elevation: SelectableChipElevationMMD? = InputChipDefaultsMMD.inputChipElevation(),
     border: BorderStroke? = InputChipDefaultsMMD.inputChipBorder(enabled, selected),
     interactionSource: MutableInteractionSource? = null,
 ) {
@@ -423,9 +423,9 @@ fun InputChipMMD(
  * @param icon optional icon at the start of the chip, preceding the [label] text
  * @param shape defines the shape of this chip's container, border (when [border] is not null), and
  *   shadow (when using [elevation])
- * @param colors [ChipColors] that will be used to resolve the colors used for this chip in
+ * @param colors [ChipColorsMMD] that will be used to resolve the colors used for this chip in
  *   different states. See [SuggestionChipDefaultsMMD.suggestionChipColors].
- * @param elevation [ChipElevation] used to resolve the elevation for this chip in different states.
+ * @param elevation [ChipElevationMMD] used to resolve the elevation for this chip in different states.
  *   This controls the size of the shadow below the chip. Additionally, when the container color is
  *   [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
  *   [SuggestionChipDefaultsMMD.suggestionChipElevation].
@@ -444,8 +444,8 @@ fun SuggestionChipMMD(
     enabled: Boolean = true,
     icon: @Composable (() -> Unit)? = null,
     shape: Shape = SuggestionChipDefaultsMMD.shape,
-    colors: ChipColors = SuggestionChipDefaultsMMD.suggestionChipColors(),
-    elevation: ChipElevation? = SuggestionChipDefaultsMMD.suggestionChipElevation(),
+    colors: ChipColorsMMD = SuggestionChipDefaultsMMD.suggestionChipColors(),
+    elevation: ChipElevationMMD? = SuggestionChipDefaultsMMD.suggestionChipElevation(),
     border: BorderStroke? = SuggestionChipDefaultsMMD.suggestionChipBorder(enabled),
     interactionSource: MutableInteractionSource? = null,
 ) =
@@ -479,14 +479,14 @@ object AssistChipDefaultsMMD {
     val IconSize = 22.dp
 
     /**
-     * Creates a [ChipColors] that represents the default container , label, and icon colors used in
+     * Creates a [ChipColorsMMD] that represents the default container , label, and icon colors used in
      * a flat [AssistChipMMD].
      */
     @Composable
     fun assistChipColors() = defaultAssistChipColors
 
     /**
-     * Creates a [ChipColors] that represents the default container , label, and icon colors used in
+     * Creates a [ChipColorsMMD] that represents the default container , label, and icon colors used in
      * a flat [AssistChipMMD].
      *
      * @param containerColor the container color of this chip when enabled
@@ -508,7 +508,7 @@ object AssistChipDefaultsMMD {
         disabledLabelColor: Color = Color.Unspecified,
         disabledLeadingIconContentColor: Color = Color.Unspecified,
         disabledTrailingIconContentColor: Color = Color.Unspecified,
-    ): ChipColors =
+    ): ChipColorsMMD =
         defaultAssistChipColors.copy(
             containerColor = containerColor,
             labelColor = labelColor,
@@ -520,9 +520,9 @@ object AssistChipDefaultsMMD {
             disabledTrailingIconContentColor = disabledTrailingIconContentColor,
         )
 
-    private val defaultAssistChipColors: ChipColors
+    private val defaultAssistChipColors: ChipColorsMMD
         @Composable
-        get() = ChipColors(
+        get() = ChipColorsMMD(
             containerColor = Color.Transparent,
             labelColor = MaterialTheme.colorScheme.onSurface,
             leadingIconContentColor = MaterialTheme.colorScheme.primary,
@@ -537,7 +537,7 @@ object AssistChipDefaultsMMD {
         )
 
     /**
-     * Creates a [ChipElevation] that will switch between the provided values according to the
+     * Creates a [ChipElevationMMD] that will switch between the provided values according to the
      * Material specification for a flat [AssistChipMMD].
      *
      * @param elevation the elevation used when the [AssistChipMMD] is has no other [Interaction]s
@@ -555,8 +555,8 @@ object AssistChipDefaultsMMD {
         hoveredElevation: Dp = elevation,
         draggedElevation: Dp = 0.dp,
         disabledElevation: Dp = elevation,
-    ): ChipElevation =
-        ChipElevation(
+    ): ChipElevationMMD =
+        ChipElevationMMD(
             elevation = elevation,
             pressedElevation = pressedElevation,
             focusedElevation = focusedElevation,
@@ -601,14 +601,14 @@ object FilterChipDefaultsMMD {
     val IconSize = 22.dp
 
     /**
-     * Creates a [SelectableChipColors] that represents the default container and content colors
+     * Creates a [SelectableChipColorsMMD] that represents the default container and content colors
      * used in a flat [FilterChipMMD].
      */
     @Composable
     fun filterChipColors() = defaultFilterChipColors
 
     /**
-     * Creates a [SelectableChipColors] that represents the default container and content colors
+     * Creates a [SelectableChipColorsMMD] that represents the default container and content colors
      * used in a flat [FilterChipMMD].
      *
      * @param containerColor the container color of this chip when enabled
@@ -639,7 +639,7 @@ object FilterChipDefaultsMMD {
         selectedLabelColor: Color = Color.Unspecified,
         selectedLeadingIconColor: Color = Color.Unspecified,
         selectedTrailingIconColor: Color = Color.Unspecified,
-    ): SelectableChipColors =
+    ): SelectableChipColorsMMD =
         defaultFilterChipColors.copy(
             containerColor = containerColor,
             labelColor = labelColor,
@@ -656,9 +656,9 @@ object FilterChipDefaultsMMD {
             selectedTrailingIconColor = selectedTrailingIconColor,
         )
 
-    private val defaultFilterChipColors: SelectableChipColors
+    private val defaultFilterChipColors: SelectableChipColorsMMD
         @Composable
-        get() = SelectableChipColors(
+        get() = SelectableChipColorsMMD(
             containerColor = Color.Transparent,
             labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
             leadingIconColor = MaterialTheme.colorScheme.primary,
@@ -679,7 +679,7 @@ object FilterChipDefaultsMMD {
         )
 
     /**
-     * Creates a [SelectableChipElevation] that will switch between the provided values according
+     * Creates a [SelectableChipElevationMMD] that will switch between the provided values according
      * to the Material specification for a flat [FilterChipMMD].
      *
      * @param elevation the elevation used when the [FilterChipMMD] is has no other [Interaction]s
@@ -697,8 +697,8 @@ object FilterChipDefaultsMMD {
         hoveredElevation: Dp = 0.dp,
         draggedElevation: Dp = 0.dp,
         disabledElevation: Dp = elevation,
-    ): SelectableChipElevation =
-        SelectableChipElevation(
+    ): SelectableChipElevationMMD =
+        SelectableChipElevationMMD(
             elevation = elevation,
             pressedElevation = pressedElevation,
             focusedElevation = focusedElevation,
@@ -765,14 +765,14 @@ object InputChipDefaultsMMD {
     val AvatarSize = 22.dp
 
     /**
-     * Creates a [SelectableChipColors] that represents the default container, label, and icon
+     * Creates a [SelectableChipColorsMMD] that represents the default container, label, and icon
      * colors used in an [InputChipMMD].
      */
     @Composable
     fun inputChipColors() = defaultInputChipColors
 
     /**
-     * Creates a [SelectableChipColors] that represents the default container, label, and icon
+     * Creates a [SelectableChipColorsMMD] that represents the default container, label, and icon
      * colors used in an [InputChipMMD].
      *
      * @param containerColor the container color of this chip when enabled
@@ -805,7 +805,7 @@ object InputChipDefaultsMMD {
         selectedLabelColor: Color = Color.Unspecified,
         selectedLeadingIconColor: Color = Color.Unspecified,
         selectedTrailingIconColor: Color = Color.Unspecified,
-    ): SelectableChipColors =
+    ): SelectableChipColorsMMD =
         defaultInputChipColors.copy(
             containerColor = containerColor,
             labelColor = labelColor,
@@ -822,9 +822,9 @@ object InputChipDefaultsMMD {
             selectedTrailingIconColor = selectedTrailingIconColor,
         )
 
-    private val defaultInputChipColors: SelectableChipColors
+    private val defaultInputChipColors: SelectableChipColorsMMD
         @Composable
-        get() = SelectableChipColors(
+        get() = SelectableChipColorsMMD(
             containerColor = Color.Transparent,
             labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
             leadingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -845,7 +845,7 @@ object InputChipDefaultsMMD {
         )
 
     /**
-     * Creates a [SelectableChipElevation] that will switch between the provided values according
+     * Creates a [SelectableChipElevationMMD] that will switch between the provided values according
      * to the Material specification for an [InputChipMMD].
      *
      * @param elevation the elevation used when the [FilterChipMMD] is has no other [Interaction]s
@@ -863,8 +863,8 @@ object InputChipDefaultsMMD {
         hoveredElevation: Dp = elevation,
         draggedElevation: Dp = 0.dp,
         disabledElevation: Dp = elevation,
-    ): SelectableChipElevation =
-        SelectableChipElevation(
+    ): SelectableChipElevationMMD =
+        SelectableChipElevationMMD(
             elevation = elevation,
             pressedElevation = pressedElevation,
             focusedElevation = focusedElevation,
@@ -928,14 +928,14 @@ object SuggestionChipDefaultsMMD {
     val IconSize = 22.dp
 
     /**
-     * Creates a [ChipColors] that represents the default container, label, and icon colors used in
+     * Creates a [ChipColorsMMD] that represents the default container, label, and icon colors used in
      * a flat [SuggestionChipMMD].
      */
     @Composable
     fun suggestionChipColors() = defaultSuggestionChipColors
 
     /**
-     * Creates a [ChipColors] that represents the default container, label, and icon colors used in
+     * Creates a [ChipColorsMMD] that represents the default container, label, and icon colors used in
      * a flat [SuggestionChipMMD].
      *
      * @param containerColor the container color of this chip when enabled
@@ -953,7 +953,7 @@ object SuggestionChipDefaultsMMD {
         disabledContainerColor: Color = Color.Unspecified,
         disabledLabelColor: Color = Color.Unspecified,
         disabledIconContentColor: Color = Color.Unspecified,
-    ): ChipColors =
+    ): ChipColorsMMD =
         defaultSuggestionChipColors.copy(
             containerColor = containerColor,
             labelColor = labelColor,
@@ -966,7 +966,7 @@ object SuggestionChipDefaultsMMD {
         )
 
     /**
-     * Creates a [ChipElevation] that will switch between the provided values according to the
+     * Creates a [ChipElevationMMD] that will switch between the provided values according to the
      * Material specification for a flat [SuggestionChipMMD].
      *
      * @param elevation the elevation used when the chip is has no other [Interaction]s
@@ -984,8 +984,8 @@ object SuggestionChipDefaultsMMD {
         hoveredElevation: Dp = elevation,
         draggedElevation: Dp = 0.dp,
         disabledElevation: Dp = elevation,
-    ): ChipElevation =
-        ChipElevation(
+    ): ChipElevationMMD =
+        ChipElevationMMD(
             elevation = elevation,
             pressedElevation = pressedElevation,
             focusedElevation = focusedElevation,
@@ -1029,8 +1029,8 @@ private fun Chip(
     leadingIcon: @Composable (() -> Unit)?,
     trailingIcon: @Composable (() -> Unit)?,
     shape: Shape,
-    colors: ChipColors,
-    elevation: ChipElevation?,
+    colors: ChipColorsMMD,
+    elevation: ChipElevationMMD?,
     border: BorderStroke?,
     minHeight: Dp,
     paddingValues: PaddingValues,
@@ -1075,8 +1075,8 @@ private fun SelectableChip(
     avatar: @Composable (() -> Unit)?,
     trailingIcon: @Composable (() -> Unit)?,
     shape: Shape,
-    colors: SelectableChipColors,
-    elevation: SelectableChipElevation?,
+    colors: SelectableChipColorsMMD,
+    elevation: SelectableChipElevationMMD?,
     border: BorderStroke?,
     minHeight: Dp,
     paddingValues: PaddingValues,
@@ -1214,7 +1214,7 @@ private fun ChipContent(
  *
  * Note that this default implementation does not take into consideration the `selectable` state
  * passed into its [shadowElevation]. If you wish to apply that state, use a different
- * [SelectableChipElevation].
+ * [SelectableChipElevationMMD].
  *
  * @param elevation the elevation used when the chip is enabled.
  * @param pressedElevation the elevation used when the chip is pressed.
@@ -1224,7 +1224,7 @@ private fun ChipContent(
  * @param disabledElevation the elevation used when the chip is not enabled
  */
 @Immutable
-class ChipElevation(
+class ChipElevationMMD(
     val elevation: Dp,
     val pressedElevation: Dp,
     val focusedElevation: Dp,
@@ -1276,7 +1276,7 @@ class ChipElevation(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is ChipElevation) return false
+        if (other !is ChipElevationMMD) return false
 
         return elevation == other.elevation &&
             pressedElevation == other.pressedElevation &&
@@ -1308,7 +1308,7 @@ class ChipElevation(
  * @param disabledElevation the elevation used when the chip is not enabled
  */
 @Immutable
-class SelectableChipElevation(
+class SelectableChipElevationMMD(
     val elevation: Dp,
     val pressedElevation: Dp,
     val focusedElevation: Dp,
@@ -1360,7 +1360,7 @@ class SelectableChipElevation(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is SelectableChipElevation) return false
+        if (other !is SelectableChipElevationMMD) return false
 
         return elevation == other.elevation &&
             pressedElevation == other.pressedElevation &&
@@ -1397,7 +1397,7 @@ class SelectableChipElevation(
  *   Chip configurations.
  */
 @Immutable
-class ChipColors(
+class ChipColorsMMD(
     val containerColor: Color,
     val labelColor: Color,
     val leadingIconContentColor: Color,
@@ -1421,7 +1421,7 @@ class ChipColors(
         disabledLeadingIconContentColor: Color = this.disabledLeadingIconContentColor,
         disabledTrailingIconContentColor: Color = this.disabledTrailingIconContentColor,
     ) =
-        ChipColors(
+        ChipColorsMMD(
             containerColor.takeOrElse { this.containerColor },
             labelColor.takeOrElse { this.labelColor },
             leadingIconContentColor.takeOrElse { this.leadingIconContentColor },
@@ -1470,7 +1470,7 @@ class ChipColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is ChipColors) return false
+        if (other == null || other !is ChipColorsMMD) return false
 
         if (containerColor != other.containerColor) return false
         if (labelColor != other.labelColor) return false
@@ -1498,9 +1498,9 @@ class ChipColors(
     }
 }
 
-internal val defaultSuggestionChipColors: ChipColors
+internal val defaultSuggestionChipColors: ChipColorsMMD
     @Composable
-    get() = ChipColors(
+    get() = ChipColorsMMD(
         containerColor = Color.Transparent,
         labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
         leadingIconContentColor = MaterialTheme.colorScheme.primary,
@@ -1519,7 +1519,7 @@ internal val defaultSuggestionChipColors: ChipColors
  * See [FilterChipDefaultsMMD.filterChipColors] for the default colors used in [FilterChipMMD].
  */
 @Immutable
-class SelectableChipColors(
+class SelectableChipColorsMMD(
     private val containerColor: Color,
     private val labelColor: Color,
     private val leadingIconColor: Color,
@@ -1553,7 +1553,7 @@ class SelectableChipColors(
         selectedLeadingIconColor: Color = this.selectedLeadingIconColor,
         selectedTrailingIconColor: Color = this.selectedTrailingIconColor,
     ) =
-        SelectableChipColors(
+        SelectableChipColorsMMD(
             containerColor.takeOrElse { this.containerColor },
             labelColor.takeOrElse { this.labelColor },
             leadingIconColor.takeOrElse { this.leadingIconColor },
@@ -1631,7 +1631,7 @@ class SelectableChipColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is SelectableChipColors) return false
+        if (other == null || other !is SelectableChipColorsMMD) return false
 
         if (containerColor != other.containerColor) return false
         if (labelColor != other.labelColor) return false

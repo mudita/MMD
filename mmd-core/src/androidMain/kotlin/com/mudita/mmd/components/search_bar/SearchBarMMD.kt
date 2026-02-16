@@ -88,7 +88,7 @@ import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.mudita.mmd.components.search_bar.SearchBarDefaultsMMD.SearchBarColorsMMD
 import com.mudita.mmd.components.search_bar.SearchBarDefaultsMMD.SearchBarImpl
 import com.mudita.mmd.components.search_bar.SearchBarDefaultsMMD.inputFieldShape
-import com.mudita.mmd.components.text_field.TextFieldColors
+import com.mudita.mmd.components.text_field.TextFieldColorsMMD
 import com.mudita.mmd.components.text_field.TextFieldDefaultsMMD
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
@@ -303,10 +303,10 @@ object SearchBarDefaultsMMD {
         )
 
     /**
-     * Creates a [TextFieldColors] that represents the different colors used in the search bar input
+     * Creates a [TextFieldColorsMMD] that represents the different colors used in the search bar input
      * field in different states.
      *
-     * Only a subset of the full list of [TextFieldColors] parameters are used in the input field.
+     * Only a subset of the full list of [TextFieldColorsMMD] parameters are used in the input field.
      * All other parameters have no effect.
      *
      * @param focusedTextColor the color used for the input text of this input field when focused
@@ -354,7 +354,7 @@ object SearchBarDefaultsMMD {
             MaterialTheme.colorScheme.onSurface.copy(
                 alpha = 0.38f,
             ),
-    ): TextFieldColors =
+    ): TextFieldColorsMMD =
         TextFieldDefaultsMMD.colors(
             focusedTextColor = focusedTextColor,
             unfocusedTextColor = unfocusedTextColor,
@@ -390,7 +390,7 @@ object SearchBarDefaultsMMD {
      * @param placeholder the placeholder to be displayed when the [query] is empty.
      * @param leadingIcon the leading icon to be displayed at the start of the input field.
      * @param trailingIcon the trailing icon to be displayed at the end of the input field.
-     * @param colors [TextFieldColors] that will be used to resolve the colors used for this input
+     * @param colors [TextFieldColorsMMD] that will be used to resolve the colors used for this input
      *   field in different states. See [SearchBarDefaultsMMD.inputFieldColors].
      * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
      *   emitting [Interaction]s for this input field. You can use this to change the search bar's
@@ -410,7 +410,7 @@ object SearchBarDefaultsMMD {
         placeholder: @Composable (() -> Unit)? = null,
         leadingIcon: @Composable (() -> Unit)? = null,
         trailingIcon: @Composable (() -> Unit)? = null,
-        colors: TextFieldColors = inputFieldColors(),
+        colors: TextFieldColorsMMD = inputFieldColors(),
         interactionSource: MutableInteractionSource? = null,
     ) {
         @Suppress("NAME_SHADOWING")
@@ -503,7 +503,7 @@ object SearchBarDefaultsMMD {
                 "TextFieldColors should be passed explicitly to the input field. " +
                 "The `inputFieldColors` property will be removed in a future version of the library.",
         )
-        val inputFieldColors: TextFieldColors,
+        val inputFieldColors: TextFieldColorsMMD,
     ) {
         constructor(
             containerColor: Color,
@@ -767,8 +767,8 @@ object SearchBarDefaultsMMD {
         return (interpolatedOffsetY * predictiveBackMultiplier * directionMultiplier).roundToInt()
     }
 
-    private val UnspecifiedTextFieldColors: TextFieldColors =
-        TextFieldColors(
+    private val UnspecifiedTextFieldColors: TextFieldColorsMMD =
+        TextFieldColorsMMD(
             focusedTextColor = Color.Unspecified,
             unfocusedTextColor = Color.Unspecified,
             disabledTextColor = Color.Unspecified,

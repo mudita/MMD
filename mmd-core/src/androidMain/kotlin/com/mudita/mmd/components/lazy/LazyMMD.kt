@@ -425,13 +425,11 @@ private fun VerticalScrollbar(
                 layoutInfo.totalItemsCount - visibleCount,
             )
 
-            val maxOffset = size.height - adjustedSliderHeight
+            val maxOffset = (size.height - adjustedSliderHeight).coerceAtLeast(0f)
+            val denominator = (layoutInfo.totalItemsCount - visibleCount).coerceAtLeast(1)
             val sliderOffset =
-                ((firstVisible.toFloat() / (layoutInfo.totalItemsCount - visibleCount)) * maxOffset)
-                    .coerceIn(
-                        0f,
-                        maxOffset,
-                    )
+                ((firstVisible.toFloat() / denominator) * maxOffset)
+                    .coerceIn(0f, maxOffset)
 
             // Draw the container for the slider
             drawRoundRect(
@@ -539,9 +537,10 @@ private fun HorizontalScrollbar(
                 layoutInfo.totalItemsCount - visibleCount,
             )
 
-            val maxOffset = size.width - adjustedSliderWidth
+            val maxOffset = (size.width - adjustedSliderWidth).coerceAtLeast(0f)
+            val denominator = (layoutInfo.totalItemsCount - visibleCount).coerceAtLeast(1)
             val sliderOffset =
-                ((firstVisible.toFloat() / (layoutInfo.totalItemsCount - visibleCount)) * maxOffset)
+                ((firstVisible.toFloat() / denominator) * maxOffset)
                     .coerceIn(0f, maxOffset)
 
             drawRoundRect(

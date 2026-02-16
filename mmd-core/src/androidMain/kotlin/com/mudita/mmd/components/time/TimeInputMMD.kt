@@ -139,7 +139,7 @@ import com.mudita.mmd.internal.top
  * @param state state for this timepicker, allows to subscribe to changes to [TimeInputStateMMD.hour]
  *   and [TimeInputStateMMD.minute], and set the initial time for this picker.
  * @param modifier the [Modifier] to be applied to this time input
- * @param colors colors [TimeInputColors] that will be used to resolve the colors used for this
+ * @param colors colors [TimeInputColorsMMD] that will be used to resolve the colors used for this
  *   time input in different states. See [TimeInputDefaultsMMD.colors].
  */
 @Composable
@@ -147,7 +147,7 @@ import com.mudita.mmd.internal.top
 fun TimeInputMMD(
     state: TimeInputStateMMD,
     modifier: Modifier = Modifier,
-    colors: TimeInputColors = TimeInputDefaultsMMD.colors(),
+    colors: TimeInputColorsMMD = TimeInputDefaultsMMD.colors(),
 ) {
     TimeInputImpl(modifier, colors, state)
 }
@@ -206,8 +206,8 @@ object TimeInputDefaultsMMD {
             timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
         )
 
-    private val defaultTimeInputColors: TimeInputColors
-        @Composable get() = TimeInputColors(
+    private val defaultTimeInputColors: TimeInputColorsMMD
+        @Composable get() = TimeInputColorsMMD(
             periodSelectorBorderColor = PeriodSelectorOutlineColor,
             periodSelectorSelectedContainerColor = PeriodSelectorSelectedContainerColor,
             periodSelectorUnselectedContainerColor = Color.Transparent,
@@ -244,7 +244,7 @@ object TimeInputDefaultsMMD {
  */
 @Immutable
 @ExperimentalMaterial3Api
-class TimeInputColors(
+class TimeInputColorsMMD(
     val periodSelectorBorderColor: Color,
     val periodSelectorSelectedContainerColor: Color,
     val periodSelectorUnselectedContainerColor: Color,
@@ -270,7 +270,7 @@ class TimeInputColors(
         timeSelectorSelectedContentColor: Color = this.timeSelectorSelectedContentColor,
         timeSelectorUnselectedContentColor: Color = this.timeSelectorUnselectedContentColor,
     ) =
-        TimeInputColors(
+        TimeInputColorsMMD(
             periodSelectorBorderColor.takeOrElse { this.periodSelectorBorderColor },
             periodSelectorSelectedContainerColor.takeOrElse {
                 this.periodSelectorSelectedContainerColor
@@ -333,7 +333,7 @@ class TimeInputColors(
         if (other === null) return false
         if (this::class != other::class) return false
 
-        other as TimeInputColors
+        other as TimeInputColorsMMD
 
         if (periodSelectorBorderColor != other.periodSelectorBorderColor) return false
         if (periodSelectorSelectedContainerColor != other.periodSelectorSelectedContainerColor)
@@ -527,7 +527,7 @@ internal val TimeInputStateMMD.hourForDisplay: Int
 @Composable
 private fun TimeInputImpl(
     modifier: Modifier,
-    colors: TimeInputColors,
+    colors: TimeInputColorsMMD,
     state: TimeInputStateMMD,
 ) {
     var hourValue by rememberSaveable(stateSaver = TextFieldValue.Saver) {
@@ -644,7 +644,7 @@ private fun TimeInputImpl(
 private fun VerticalPeriodToggle(
     modifier: Modifier,
     state: TimeInputStateMMD,
-    colors: TimeInputColors,
+    colors: TimeInputColorsMMD,
 ) {
     val measurePolicy = remember {
         MeasurePolicy { measurables, constraints ->
@@ -689,7 +689,7 @@ private fun VerticalPeriodToggle(
 private fun PeriodToggleImpl(
     modifier: Modifier,
     state: TimeInputStateMMD,
-    colors: TimeInputColors,
+    colors: TimeInputColorsMMD,
     measurePolicy: MeasurePolicy,
     startShape: Shape,
     endShape: Shape,
@@ -741,7 +741,7 @@ private fun ToggleItem(
     checked: Boolean,
     shape: Shape,
     onClick: () -> Unit,
-    colors: TimeInputColors,
+    colors: TimeInputColorsMMD,
     content: @Composable RowScope.() -> Unit,
 ) {
     val contentColor = colors.periodSelectorContentColor(checked)
@@ -789,7 +789,7 @@ private fun TimeSelector(
     value: Int,
     state: TimeInputStateMMD,
     selection: TimePickerSelectionMode,
-    colors: TimeInputColors,
+    colors: TimeInputColorsMMD,
 ) {
     val context = LocalContext.current
     val selected = state.selection == selection
@@ -900,7 +900,7 @@ private fun TimePickerTextField(
     selection: TimePickerSelectionMode,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    colors: TimeInputColors,
+    colors: TimeInputColorsMMD,
 ) {
     val context = LocalContext.current
     val interactionSource = remember { MutableInteractionSource() }

@@ -95,9 +95,9 @@ import androidx.compose.ui.unit.dp
  * @param modifier the [Modifier] to be applied to this card
  * @param shape defines the shape of this card's container, border (when [border] is not null), and
  *   shadow (when using [elevation])
- * @param colors [CardColors] that will be used to resolve the colors used for this card in
+ * @param colors [CardColorsMMD] that will be used to resolve the colors used for this card in
  *   different states. See [CardDefaultsMMD.cardColors].
- * @param elevation [CardElevation] used to resolve the elevation for this card in different states.
+ * @param elevation [CardElevationMMD] used to resolve the elevation for this card in different states.
  *   This controls the size of the shadow below the card. Additionally, when the container color is
  *   [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
  *   also: [Surface].
@@ -107,8 +107,8 @@ import androidx.compose.ui.unit.dp
 fun CardMMD(
     modifier: Modifier = Modifier,
     shape: Shape = CardDefaultsMMD.shape,
-    colors: CardColors = CardDefaultsMMD.cardColors(),
-    elevation: CardElevation = CardDefaultsMMD.cardElevation(),
+    colors: CardColorsMMD = CardDefaultsMMD.cardColors(),
+    elevation: CardElevationMMD = CardDefaultsMMD.cardElevation(),
     border: BorderStroke? = CardDefaultsMMD.border,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -173,9 +173,9 @@ fun CardMMD(
  *   services.
  * @param shape defines the shape of this card's container, border (when [border] is not null), and
  *   shadow (when using [elevation])
- * @param colors [CardColors] that will be used to resolve the color(s) used for this card in
+ * @param colors [CardColorsMMD] that will be used to resolve the color(s) used for this card in
  *   different states. See [CardDefaultsMMD.cardColors].
- * @param elevation [CardElevation] used to resolve the elevation for this card in different states.
+ * @param elevation [CardElevationMMD] used to resolve the elevation for this card in different states.
  *   This controls the size of the shadow below the card. Additionally, when the container color is
  *   [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
  *   also: [Surface].
@@ -191,8 +191,8 @@ fun CardMMD(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shape: Shape = CardDefaultsMMD.shape,
-    colors: CardColors = CardDefaultsMMD.cardColors(),
-    elevation: CardElevation = CardDefaultsMMD.cardElevation(),
+    colors: CardColorsMMD = CardDefaultsMMD.cardColors(),
+    elevation: CardElevationMMD = CardDefaultsMMD.cardElevation(),
     border: BorderStroke? = CardDefaultsMMD.border(enabled),
     interactionSource: MutableInteractionSource? = null,
     content: @Composable ColumnScope.() -> Unit,
@@ -227,7 +227,7 @@ object CardDefaultsMMD {
         @Composable get() = BorderStroke(3.dp, MaterialTheme.colorScheme.outline)
 
     /**
-     * Creates a [CardElevation] that will switch between the provided values according to the
+     * Creates a [CardElevationMMD] that will switch between the provided values according to the
      * Material specification for a [CardMMD].
      *
      * @param defaultElevation the elevation used when the [CardMMD] is has no other [Interaction]s.
@@ -244,8 +244,8 @@ object CardDefaultsMMD {
         hoveredElevation: Dp = 0.dp,
         draggedElevation: Dp = 0.dp,
         disabledElevation: Dp = 0.dp,
-    ): CardElevation =
-        CardElevation(
+    ): CardElevationMMD =
+        CardElevationMMD(
             defaultElevation = defaultElevation,
             pressedElevation = pressedElevation,
             focusedElevation = focusedElevation,
@@ -255,14 +255,14 @@ object CardDefaultsMMD {
         )
 
     /**
-     * Creates a [CardColors] that represents the default container and content colors used in a
+     * Creates a [CardColorsMMD] that represents the default container and content colors used in a
      * [CardMMD].
      */
     @Composable
     fun cardColors() = defaultCardColors
 
     /**
-     * Creates a [CardColors] that represents the default container and content colors used in a
+     * Creates a [CardColorsMMD] that represents the default container and content colors used in a
      * [CardMMD].
      *
      * @param containerColor the container color of this [CardMMD] when enabled.
@@ -276,7 +276,7 @@ object CardDefaultsMMD {
         contentColor: Color = contentColorFor(containerColor),
         disabledContainerColor: Color = Color.Unspecified,
         disabledContentColor: Color = contentColor.copy(.38f),
-    ): CardColors =
+    ): CardColorsMMD =
         defaultCardColors.copy(
             containerColor = containerColor,
             contentColor = contentColor,
@@ -284,9 +284,9 @@ object CardDefaultsMMD {
             disabledContentColor = disabledContentColor,
         )
 
-    private val defaultCardColors: CardColors
+    private val defaultCardColors: CardColorsMMD
         @Composable
-        get() = CardColors(
+        get() = CardColorsMMD(
             containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
             contentColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerHighest),
             disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -315,7 +315,7 @@ object CardDefaultsMMD {
  * - See [CardDefaultsMMD.cardElevation] for the default elevation used in a [CardMMD].
  */
 @Immutable
-class CardElevation
+class CardElevationMMD
 internal constructor(
     private val defaultElevation: Dp,
     private val pressedElevation: Dp,
@@ -376,7 +376,7 @@ internal constructor(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is CardElevation) return false
+        if (other == null || other !is CardElevationMMD) return false
 
         if (defaultElevation != other.defaultElevation) return false
         if (pressedElevation != other.pressedElevation) return false
@@ -410,7 +410,7 @@ internal constructor(
  * - See [CardDefaultsMMD.outlinedCardColors] for the default colors used in a [OutlinedCardMMD].
  */
 @Immutable
-class CardColors(
+class CardColorsMMD(
     val containerColor: Color,
     val contentColor: Color,
     val disabledContainerColor: Color,
@@ -426,7 +426,7 @@ class CardColors(
         disabledContainerColor: Color = this.disabledContainerColor,
         disabledContentColor: Color = this.disabledContentColor,
     ) =
-        CardColors(
+        CardColorsMMD(
             containerColor.takeOrElse { this.containerColor },
             contentColor.takeOrElse { this.contentColor },
             disabledContainerColor.takeOrElse { this.disabledContainerColor },
@@ -453,7 +453,7 @@ class CardColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is CardColors) return false
+        if (other == null || other !is CardColorsMMD) return false
 
         if (containerColor != other.containerColor) return false
         if (contentColor != other.contentColor) return false

@@ -61,9 +61,9 @@ import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.R
-import com.mudita.mmd.components.bottom_sheet.SheetValue.Expanded
-import com.mudita.mmd.components.bottom_sheet.SheetValue.Hidden
-import com.mudita.mmd.components.bottom_sheet.SheetValue.PartiallyExpanded
+import com.mudita.mmd.components.bottom_sheet.SheetValueMMD.Expanded
+import com.mudita.mmd.components.bottom_sheet.SheetValueMMD.Hidden
+import com.mudita.mmd.components.bottom_sheet.SheetValueMMD.PartiallyExpanded
 import com.mudita.mmd.internal.bottom_sheet.DraggableAnchors
 import com.mudita.mmd.internal.bottom_sheet.draggableAnchors
 import kotlinx.coroutines.CoroutineScope
@@ -389,7 +389,7 @@ internal fun BoxScope.ModalBottomSheetContent(
 @ExperimentalMaterial3Api
 fun rememberModalBottomSheetMMDState(
     skipPartiallyExpanded: Boolean = false,
-    confirmValueChange: (SheetValue) -> Boolean = { true },
+    confirmValueChange: (SheetValueMMD) -> Boolean = { true },
 ) =
     rememberSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
