@@ -186,7 +186,7 @@ fun BadgedBoxMMD(
 @Composable
 fun BadgeMMD(
     modifier: Modifier = Modifier,
-    containerColor: Color = BadgeDefaults.containerColor,
+    containerColor: Color = BadgeDefaultsMMD.containerColor,
     contentColor: Color = contentColorFor(containerColor),
     content: @Composable (RowScope.() -> Unit)? = null,
 ) {
@@ -223,7 +223,7 @@ fun BadgeMMD(
 }
 
 /** Default values used for [BadgeMMD] implementations. */
-object BadgeDefaults {
+object BadgeDefaultsMMD {
     /** Default container color for a badge. */
     val containerColor: Color
         @Composable get() = MaterialTheme.colorScheme.primaryContainer

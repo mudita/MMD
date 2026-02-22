@@ -105,7 +105,7 @@ import kotlin.math.max
  * @param enabled controls the enabled state of this checkbox. When `false`, this component will not
  *   respond to user input, and it will appear visually disabled and disabled to accessibility
  *   services.
- * @param colors [CheckboxColors] that will be used to resolve the colors used for this checkbox in
+ * @param colors [CheckboxColorsMMD] that will be used to resolve the colors used for this checkbox in
  *   different states. See [CheckboxDefaultsMMD.colors].
  * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
  *   emitting [Interaction]s for this checkbox. You can use this to change the checkbox's appearance
@@ -119,7 +119,7 @@ fun CheckboxMMD(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: CheckboxColors = CheckboxDefaultsMMD.colors(),
+    colors: CheckboxColorsMMD = CheckboxDefaultsMMD.colors(),
     interactionSource: MutableInteractionSource? = null
 ) {
     TriStateCheckboxMMD(
@@ -216,7 +216,7 @@ fun CheckboxMMD(
  * @param enabled controls the enabled state of this checkbox. When `false`, this component will not
  *   respond to user input, and it will appear visually disabled and disabled to accessibility
  *   services.
- * @param colors [CheckboxColors] that will be used to resolve the colors used for this checkbox in
+ * @param colors [CheckboxColorsMMD] that will be used to resolve the colors used for this checkbox in
  *   different states. See [CheckboxDefaultsMMD.colors].
  * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
  *   emitting [Interaction]s for this checkbox. You can use this to change the checkbox's appearance
@@ -230,7 +230,7 @@ fun TriStateCheckboxMMD(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: CheckboxColors = CheckboxDefaultsMMD.colors(),
+    colors: CheckboxColorsMMD = CheckboxDefaultsMMD.colors(),
     interactionSource: MutableInteractionSource? = null
 ) {
     val toggleableModifier =
@@ -267,14 +267,14 @@ fun TriStateCheckboxMMD(
 /** Defaults used in [CheckboxMMD] and [TriStateCheckboxMMD]. */
 object CheckboxDefaultsMMD {
     /**
-     * Creates a [CheckboxColors] that will animate between the provided colors according to the
+     * Creates a [CheckboxColorsMMD] that will animate between the provided colors according to the
      * Material specification.
      */
     @Composable
     fun colors() = defaultCheckboxColors
 
     /**
-     * Creates a [CheckboxColors] that will animate between the provided colors according to the
+     * Creates a [CheckboxColorsMMD] that will animate between the provided colors according to the
      * Material specification.
      *
      * @param checkedColor the color that will be used for the border and box when checked
@@ -296,7 +296,7 @@ object CheckboxDefaultsMMD {
         disabledCheckedColor: Color = Color.Unspecified,
         disabledUncheckedColor: Color = Color.Unspecified,
         disabledIndeterminateColor: Color = Color.Unspecified
-    ): CheckboxColors = defaultCheckboxColors.copy(
+    ): CheckboxColorsMMD = defaultCheckboxColors.copy(
         checkedCheckmarkColor = checkmarkColor,
         uncheckedCheckmarkColor = Color.Transparent,
         checkedBoxColor = checkedColor,
@@ -311,8 +311,8 @@ object CheckboxDefaultsMMD {
         disabledIndeterminateBorderColor = disabledIndeterminateColor
     )
 
-    private val defaultCheckboxColors: CheckboxColors
-        @Composable get() = CheckboxColors(
+    private val defaultCheckboxColors: CheckboxColorsMMD
+        @Composable get() = CheckboxColorsMMD(
             checkedCheckmarkColor = SelectedIconColor,
             uncheckedCheckmarkColor = Color.Transparent,
             checkedBoxColor = SelectedContainerColor,
@@ -338,7 +338,7 @@ private fun CheckboxImpl(
     enabled: Boolean,
     value: ToggleableState,
     modifier: Modifier,
-    colors: CheckboxColors
+    colors: CheckboxColorsMMD
 ) {
     val checkDrawFraction = when (value) {
         ToggleableState.On -> 1f
@@ -477,7 +477,7 @@ private class CheckDrawingCache(
  *   default implementation that follows Material specifications.
  */
 @Immutable
-class CheckboxColors(
+class CheckboxColorsMMD(
     val checkedCheckmarkColor: Color,
     val uncheckedCheckmarkColor: Color,
     val checkedBoxColor: Color,
@@ -509,7 +509,7 @@ class CheckboxColors(
         disabledUncheckedBorderColor: Color = this.disabledUncheckedBorderColor,
         disabledIndeterminateBorderColor: Color = this.disabledIndeterminateBorderColor
     ) =
-        CheckboxColors(
+        CheckboxColorsMMD(
             checkedCheckmarkColor.takeOrElse { this.checkedCheckmarkColor },
             uncheckedCheckmarkColor.takeOrElse { this.uncheckedCheckmarkColor },
             checkedBoxColor.takeOrElse { this.checkedBoxColor },
@@ -597,7 +597,7 @@ class CheckboxColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is CheckboxColors) return false
+        if (other == null || other !is CheckboxColorsMMD) return false
 
         if (checkedCheckmarkColor != other.checkedCheckmarkColor) return false
         if (uncheckedCheckmarkColor != other.uncheckedCheckmarkColor) return false

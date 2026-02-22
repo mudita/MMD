@@ -51,9 +51,9 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupPositionProvider
-import com.mudita.mmd.components.tooltip.CaretDirection.Auto
-import com.mudita.mmd.components.tooltip.CaretDirection.Down
-import com.mudita.mmd.components.tooltip.CaretDirection.Up
+import com.mudita.mmd.components.tooltip.CaretDirectionMMD.Auto
+import com.mudita.mmd.components.tooltip.CaretDirectionMMD.Down
+import com.mudita.mmd.components.tooltip.CaretDirectionMMD.Up
 
 /**
  * A custom tooltip component that displays a message when the user hovers over or focuses on a specific UI element.
@@ -114,7 +114,7 @@ import com.mudita.mmd.components.tooltip.CaretDirection.Up
 fun TooltipMMD(
     modifier: Modifier = Modifier,
     caretSize: DpSize = TooltipDefaultsMMD.CaretSize,
-    caretDirection: CaretDirection = Auto,
+    caretDirection: CaretDirectionMMD = Auto,
     containerColor: Color = TooltipDefaultsMMD.ContainerColor,
     contentColor: Color = TooltipDefaultsMMD.ContentColor,
     borderColor: Color = TooltipDefaultsMMD.BorderColor,
@@ -212,7 +212,7 @@ fun TooltipMMD(
     }
 }
 
-enum class CaretDirection { Up, Down, Auto }
+enum class CaretDirectionMMD { Up, Down, Auto }
 
 /**
  * TooltipDefaultsMMD provides default values and configurations for tooltips in a Composable UI.
@@ -285,7 +285,7 @@ object TooltipDefaultsMMD {
     @Composable
     fun rememberPlainTooltipPositionProvider(
         spacingBetweenTooltipAndAnchor: Dp = SpacingBetweenTooltipAndAnchor,
-        onCaretDirectionChange: (CaretDirection) -> Unit,
+        onCaretDirectionChange: (CaretDirectionMMD) -> Unit,
     ): PopupPositionProvider {
         val tooltipAnchorSpacing =
             with(LocalDensity.current) { spacingBetweenTooltipAndAnchor.roundToPx() }
@@ -299,14 +299,14 @@ object TooltipDefaultsMMD {
 /**
  * A [PopupPositionProvider] implementation for positioning a tooltip relative to its anchor.
  * This class calculates the optimal position for the tooltip, ensuring it does not overlap with the anchor.
- * It also handles caret direction changes when the caret direction is set to [CaretDirection.Auto].
+ * It also handles caret direction changes when the caret direction is set to [CaretDirectionMMD.Auto].
  *
  * @param tooltipAnchorSpacing The space in pixels between the tooltip and its anchor.
  * @param onCaretDirectionChange A callback invoked when the caret direction changes.
  * */
 private class PlainTooltipPositionProvider(
     private val tooltipAnchorSpacing: Int,
-    private val onCaretDirectionChange: (CaretDirection) -> Unit,
+    private val onCaretDirectionChange: (CaretDirectionMMD) -> Unit,
 ) : PopupPositionProvider {
 
     override fun calculatePosition(

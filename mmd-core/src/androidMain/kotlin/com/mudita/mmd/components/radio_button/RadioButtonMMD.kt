@@ -121,7 +121,7 @@ import androidx.compose.ui.unit.dp
  * @param enabled controls the enabled state of this radio button. When `false`, this component will
  *   not respond to user input, and it will appear visually disabled and disabled to accessibility
  *   services.
- * @param colors [RadioButtonColors] that will be used to resolve the color used for this radio
+ * @param colors [RadioButtonColorsMMD] that will be used to resolve the color used for this radio
  *   button in different states. See [RadioButtonDefaultsMMD.colors].
  * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
  *   emitting [Interaction]s for this radio button. You can use this to change the radio button's
@@ -134,7 +134,7 @@ fun RadioButtonMMD(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: RadioButtonColors = RadioButtonDefaultsMMD.colors(),
+    colors: RadioButtonColorsMMD = RadioButtonDefaultsMMD.colors(),
     interactionSource: MutableInteractionSource? = null,
 ) {
     val radioColor = colors.radioColor(enabled, selected)
@@ -186,14 +186,14 @@ fun RadioButtonMMD(
 object RadioButtonDefaultsMMD {
 
     /**
-     * Creates a [RadioButtonColors] that will animate between the provided colors according to the
+     * Creates a [RadioButtonColorsMMD] that will animate between the provided colors according to the
      * Material specification.
      */
     @Composable
     fun colors() = defaultRadioButtonColors
 
     /**
-     * Creates a [RadioButtonColors] that will animate between the provided colors according to the
+     * Creates a [RadioButtonColorsMMD] that will animate between the provided colors according to the
      * Material specification.
      *
      * @param selectedColor the color to use for the RadioButton when selected and enabled.
@@ -201,7 +201,7 @@ object RadioButtonDefaultsMMD {
      * @param disabledSelectedColor the color to use for the RadioButton when disabled and selected.
      * @param disabledUnselectedColor the color to use for the RadioButton when disabled and not
      *   selected.
-     * @return the resulting [RadioButtonColors] used for the RadioButton
+     * @return the resulting [RadioButtonColorsMMD] used for the RadioButton
      */
     @Composable
     fun colors(
@@ -209,7 +209,7 @@ object RadioButtonDefaultsMMD {
         unselectedColor: Color = Color.Unspecified,
         disabledSelectedColor: Color = Color.Unspecified,
         disabledUnselectedColor: Color = Color.Unspecified,
-    ): RadioButtonColors =
+    ): RadioButtonColorsMMD =
         defaultRadioButtonColors.copy(
             selectedColor,
             unselectedColor,
@@ -217,8 +217,8 @@ object RadioButtonDefaultsMMD {
             disabledUnselectedColor,
         )
 
-    private val defaultRadioButtonColors: RadioButtonColors
-        @Composable get() = RadioButtonColors(
+    private val defaultRadioButtonColors: RadioButtonColorsMMD
+        @Composable get() = RadioButtonColorsMMD(
             selectedColor = SelectedIconColor,
             unselectedColor = UnselectedIconColor,
             disabledSelectedColor = DisabledSelectedIconColor.copy(alpha = DisabledSelectedIconOpacity),
@@ -238,7 +238,7 @@ object RadioButtonDefaultsMMD {
  *   default implementation that follows Material specifications.
  */
 @Immutable
-class RadioButtonColors(
+class RadioButtonColorsMMD(
     val selectedColor: Color,
     val unselectedColor: Color,
     val disabledSelectedColor: Color,
@@ -254,7 +254,7 @@ class RadioButtonColors(
         disabledSelectedColor: Color = this.disabledSelectedColor,
         disabledUnselectedColor: Color = this.disabledUnselectedColor,
     ) =
-        RadioButtonColors(
+        RadioButtonColorsMMD(
             selectedColor.takeOrElse { this.selectedColor },
             unselectedColor.takeOrElse { this.unselectedColor },
             disabledSelectedColor.takeOrElse { this.disabledSelectedColor },
@@ -283,7 +283,7 @@ class RadioButtonColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is RadioButtonColors) return false
+        if (other == null || other !is RadioButtonColorsMMD) return false
 
         if (selectedColor != other.selectedColor) return false
         if (unselectedColor != other.unselectedColor) return false

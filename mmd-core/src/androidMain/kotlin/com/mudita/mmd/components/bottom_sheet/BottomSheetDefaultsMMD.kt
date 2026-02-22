@@ -48,9 +48,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
-import com.mudita.mmd.components.bottom_sheet.SheetValue.Expanded
-import com.mudita.mmd.components.bottom_sheet.SheetValue.Hidden
-import com.mudita.mmd.components.bottom_sheet.SheetValue.PartiallyExpanded
+import com.mudita.mmd.components.bottom_sheet.SheetValueMMD.Expanded
+import com.mudita.mmd.components.bottom_sheet.SheetValueMMD.Hidden
+import com.mudita.mmd.components.bottom_sheet.SheetValueMMD.PartiallyExpanded
 import com.mudita.mmd.internal.bottom_sheet.AnchoredDraggableState
 import com.mudita.mmd.internal.bottom_sheet.moveTo
 import com.mudita.mmd.internal.bottom_sheet.snapTo
@@ -77,8 +77,8 @@ import kotlinx.coroutines.CancellationException
 class SheetStateMMD(
     internal val skipPartiallyExpanded: Boolean,
     density: Density,
-    initialValue: SheetValue = Hidden,
-    confirmValueChange: (SheetValue) -> Boolean = { true },
+    initialValue: SheetValueMMD = Hidden,
+    confirmValueChange: (SheetValueMMD) -> Boolean = { true },
     private val skipHiddenState: Boolean = false,
 ) {
     init {
@@ -101,7 +101,7 @@ class SheetStateMMD(
      * currently in. If a swipe or an animation is in progress, this corresponds the state the sheet
      * was in before the swipe or animation started.
      */
-    val currentValue: SheetValue
+    val currentValue: SheetValueMMD
         get() = anchoredDraggableState.currentValue
 
     /**
@@ -111,7 +111,7 @@ class SheetStateMMD(
      * finishes. If an animation is running, this is the target value of that animation. Finally, if
      * no swipe or animation is in progress, this is the same as the [currentValue].
      */
-    val targetValue: SheetValue
+    val targetValue: SheetValueMMD
         get() = anchoredDraggableState.targetValue
 
     /** Whether the modal bottom sheet is visible. */
@@ -207,7 +207,7 @@ class SheetStateMMD(
      *   call.
      */
     private suspend fun moveTo(
-        targetValue: SheetValue,
+        targetValue: SheetValueMMD,
         velocity: Float = anchoredDraggableState.lastVelocity,
     ) {
         anchoredDraggableState.moveTo(targetValue, velocity)
@@ -221,7 +221,7 @@ class SheetStateMMD(
      *   gesture interaction or another programmatic interaction like a [moveTo] or [snapTo]
      *   call.
      */
-    private suspend fun snapTo(targetValue: SheetValue) {
+    private suspend fun snapTo(targetValue: SheetValueMMD) {
         anchoredDraggableState.snapTo(targetValue)
     }
 
@@ -244,11 +244,11 @@ class SheetStateMMD(
         /** The default [Saver] implementation for [SheetStateMMD]. */
         fun Saver(
             skipPartiallyExpanded: Boolean,
-            confirmValueChange: (SheetValue) -> Boolean,
+            confirmValueChange: (SheetValueMMD) -> Boolean,
             density: Density,
             skipHiddenState: Boolean,
         ) =
-            Saver<SheetStateMMD, SheetValue>(
+            Saver<SheetStateMMD, SheetValueMMD>(
                 save = { it.currentValue },
                 restore = { savedValue ->
                     SheetStateMMD(
@@ -265,7 +265,7 @@ class SheetStateMMD(
 
 /** Possible values of [SheetStateMMD]. */
 @ExperimentalMaterial3Api
-enum class SheetValue {
+enum class SheetValueMMD {
     /** The sheet is not visible. */
     Hidden,
 
@@ -386,8 +386,8 @@ internal fun consumeSwipeWithinBottomSheetBoundsNestedScrollConnection(
 @ExperimentalMaterial3Api
 internal fun rememberSheetState(
     skipPartiallyExpanded: Boolean = false,
-    confirmValueChange: (SheetValue) -> Boolean = { true },
-    initialValue: SheetValue = Hidden,
+    confirmValueChange: (SheetValueMMD) -> Boolean = { true },
+    initialValue: SheetValueMMD = Hidden,
     skipHiddenState: Boolean = false,
 ): SheetStateMMD {
     val density = LocalDensity.current

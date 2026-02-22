@@ -139,13 +139,13 @@ fun OutlinedButtonMMD(
     content = content,
 )
 
-private object ButtonDefaultsMMD {
-    private val buttonHorizontalPadding = 16.dp
-    private val buttonVerticalPadding = 8.dp
-    private val buttonCornerRadius = 8.dp
-    private val borderWidth = 2.dp
-    private val borderColor1 = Color.Black
-    private val borderColor2 = Color.Black.copy(alpha = 0.75f)
+object ButtonDefaultsMMD {
+    val buttonHorizontalPadding = 16.dp
+    val buttonVerticalPadding = 8.dp
+    val buttonCornerRadius = 8.dp
+    val borderWidth = 2.dp
+    val borderColor1 = Color.Black
+    val borderColor2 = Color.Black.copy(alpha = 0.75f)
 
     /**
      * The default content padding used by [ButtonMMD] and [OutlinedButton] buttons.

@@ -315,7 +315,7 @@ import kotlin.math.roundToInt
  *   appearance or preview the text field in different states. Note that if `null` is provided,
  *   interactions will still happen internally.
  * @param shape defines the shape of this text field's container
- * @param colors [TextFieldColors] that will be used to resolve the colors used for this text field
+ * @param colors [TextFieldColorsMMD] that will be used to resolve the colors used for this text field
  *   in different states. See [TextFieldDefaultsMMD.colors].
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -343,7 +343,7 @@ fun TextFieldMMD(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource? = null,
     shape: Shape = TextFieldDefaultsMMD.shape,
-    colors: TextFieldColors = TextFieldDefaultsMMD.colors(),
+    colors: TextFieldColorsMMD = TextFieldDefaultsMMD.colors(),
 ) {
     @Suppress("NAME_SHADOWING")
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
@@ -474,7 +474,7 @@ fun TextFieldMMD(
  *   appearance or preview the text field in different states. Note that if `null` is provided,
  *   interactions will still happen internally.
  * @param shape defines the shape of this text field's container
- * @param colors [TextFieldColors] that will be used to resolve the colors used for this text field
+ * @param colors [TextFieldColorsMMD] that will be used to resolve the colors used for this text field
  *   in different states. See [TextFieldDefaultsMMD.colors].
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -502,7 +502,7 @@ fun TextFieldMMD(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource? = null,
     shape: Shape = TextFieldDefaultsMMD.shape,
-    colors: TextFieldColors = TextFieldDefaultsMMD.colors(),
+    colors: TextFieldColorsMMD = TextFieldDefaultsMMD.colors(),
 ) {
     @Suppress("NAME_SHADOWING")
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }

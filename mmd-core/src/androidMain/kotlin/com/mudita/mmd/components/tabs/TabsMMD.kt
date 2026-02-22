@@ -192,7 +192,7 @@ fun PrimaryTabRowMMD(
     modifier: Modifier = Modifier,
     containerColor: Color = TabRowDefaultsMMD.primaryContainerColor,
     contentColor: Color = TabRowDefaultsMMD.primaryContentColor,
-    indicator: @Composable TabIndicatorScope.() -> Unit = {
+    indicator: @Composable TabIndicatorScopeMMD.() -> Unit = {
         TabRowDefaultsMMD.PrimaryIndicator(
             modifier = Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = true),
             width = Dp.Unspecified,
@@ -268,7 +268,7 @@ fun SecondaryTabRowMMD(
     modifier: Modifier = Modifier,
     containerColor: Color = TabRowDefaultsMMD.secondaryContainerColor,
     contentColor: Color = TabRowDefaultsMMD.secondaryContentColor,
-    indicator: @Composable TabIndicatorScope.() -> Unit =
+    indicator: @Composable TabIndicatorScopeMMD.() -> Unit =
         @Composable {
             TabRowDefaultsMMD.SecondaryIndicator(
                 Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = false),
@@ -454,7 +454,7 @@ fun PrimaryScrollableTabRowMMD(
     containerColor: Color = TabRowDefaultsMMD.primaryContainerColor,
     contentColor: Color = TabRowDefaultsMMD.primaryContentColor,
     edgePadding: Dp = TabRowDefaultsMMD.ScrollableTabRowEdgeStartPadding,
-    indicator: @Composable TabIndicatorScope.() -> Unit =
+    indicator: @Composable TabIndicatorScopeMMD.() -> Unit =
         @Composable {
             TabRowDefaultsMMD.PrimaryIndicator(
                 Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = true),
@@ -521,7 +521,7 @@ fun SecondaryScrollableTabRowMMD(
     containerColor: Color = TabRowDefaultsMMD.secondaryContainerColor,
     contentColor: Color = TabRowDefaultsMMD.secondaryContentColor,
     edgePadding: Dp = TabRowDefaultsMMD.ScrollableTabRowEdgeStartPadding,
-    indicator: @Composable TabIndicatorScope.() -> Unit =
+    indicator: @Composable TabIndicatorScopeMMD.() -> Unit =
         @Composable {
             TabRowDefaultsMMD.SecondaryIndicator(
                 Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = false),
@@ -613,7 +613,7 @@ fun ScrollableTabRowMMD(
  * [TabRowDefaultsMMD.SecondaryIndicator]
  */
 @ExperimentalMaterial3Api
-interface TabIndicatorScope {
+interface TabIndicatorScopeMMD {
 
     /**
      * A layout modifier that provides tab positions, this can be used to animate and layout a
@@ -646,7 +646,7 @@ private fun TabRowImpl(
     modifier: Modifier,
     containerColor: Color,
     contentColor: Color,
-    indicator: @Composable TabIndicatorScope.() -> Unit,
+    indicator: @Composable TabIndicatorScopeMMD.() -> Unit,
     divider: @Composable () -> Unit,
     tabs: @Composable () -> Unit,
 ) {
@@ -656,7 +656,7 @@ private fun TabRowImpl(
         contentColor = contentColor,
     ) {
         val scope = remember {
-            object : TabIndicatorScope, TabPositionsHolder {
+            object : TabIndicatorScopeMMD, TabPositionsHolder {
 
                 val tabPositions = mutableStateOf<(List<TabPositionMMD>)>(listOf())
 
@@ -769,7 +769,7 @@ private fun ScrollableTabRowImpl(
     contentColor: Color,
     edgePadding: Dp,
     scrollState: ScrollState,
-    indicator: @Composable TabIndicatorScope.() -> Unit,
+    indicator: @Composable TabIndicatorScopeMMD.() -> Unit,
     divider: @Composable () -> Unit,
     tabs: @Composable () -> Unit,
 ) {
@@ -791,7 +791,7 @@ private fun ScrollableTabRowImpl(
             }
 
         val scope = remember {
-            object : TabIndicatorScope, TabPositionsHolder {
+            object : TabIndicatorScopeMMD, TabPositionsHolder {
 
                 val tabPositions = mutableStateOf<(List<TabPositionMMD>)>(listOf())
 

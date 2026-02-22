@@ -77,7 +77,7 @@ internal fun CommonDecorationBox(
     isError: Boolean = false,
     interactionSource: InteractionSource,
     contentPadding: PaddingValues,
-    colors: TextFieldColors,
+    colors: TextFieldColorsMMD,
     container: @Composable () -> Unit,
 ) {
     val transformedText = remember(value, visualTransformation) {
@@ -325,7 +325,7 @@ internal fun getBorderStroke(
     enabled: Boolean,
     isError: Boolean,
     focused: Boolean,
-    colors: TextFieldColors,
+    colors: TextFieldColorsMMD,
     focusedBorderThickness: Dp,
     unfocusedBorderThickness: Dp,
 ): State<BorderStroke> {

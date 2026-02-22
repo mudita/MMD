@@ -87,7 +87,7 @@ object TextFieldDefaultsMMD {
      * @param interactionSource the [InteractionSource] of the text field. Used to determine if the
      *   text field is in focus or not
      * @param modifier the [Modifier] of this container
-     * @param colors [TextFieldColors] used to resolve colors of the text field
+     * @param colors [TextFieldColorsMMD] used to resolve colors of the text field
      * @param shape the shape of this container
      * @param focusedIndicatorLineThickness thickness of the indicator line when the text field is
      *   focused
@@ -101,7 +101,7 @@ object TextFieldDefaultsMMD {
         isError: Boolean,
         interactionSource: InteractionSource,
         modifier: Modifier = Modifier,
-        colors: TextFieldColors = colors(),
+        colors: TextFieldColorsMMD = colors(),
         shape: Shape = TextFieldDefaultsMMD.shape,
         focusedIndicatorLineThickness: Dp = FocusedIndicatorThickness,
         unfocusedIndicatorLineThickness: Dp = UnfocusedIndicatorThickness,
@@ -134,7 +134,7 @@ object TextFieldDefaultsMMD {
      * @param isError whether the text field's current value is in error
      * @param interactionSource the [InteractionSource] of the text field. Used to determine if the
      *   text field is in focus or not
-     * @param colors [TextFieldColors] used to resolve colors of the text field
+     * @param colors [TextFieldColorsMMD] used to resolve colors of the text field
      * @param focusedIndicatorLineThickness thickness of the indicator line when the text field is
      *   focused
      * @param unfocusedIndicatorLineThickness thickness of the indicator line when the text field is
@@ -145,7 +145,7 @@ object TextFieldDefaultsMMD {
         enabled: Boolean,
         isError: Boolean,
         interactionSource: InteractionSource,
-        colors: TextFieldColors,
+        colors: TextFieldColorsMMD,
         focusedIndicatorLineThickness: Dp = FocusedIndicatorThickness,
         unfocusedIndicatorLineThickness: Dp = UnfocusedIndicatorThickness
     ) =
@@ -264,7 +264,7 @@ object TextFieldDefaultsMMD {
      * @param suffix the optional suffix to be displayed after the input text in the text field
      * @param supportingText the optional supporting text to be displayed below the text field
      * @param shape defines the shape of this decoration box's container
-     * @param colors [TextFieldColors] that will be used to resolve the colors used for this text
+     * @param colors [TextFieldColorsMMD] that will be used to resolve the colors used for this text
      *   field decoration box in different states. See [TextFieldDefaultsMMD.colors].
      * @param contentPadding the padding applied between the internal elements of this decoration
      *   box and the edge of its container. If a [label] is present, the top padding represents the
@@ -293,7 +293,7 @@ object TextFieldDefaultsMMD {
         suffix: @Composable (() -> Unit)? = null,
         supportingText: @Composable (() -> Unit)? = null,
         shape: Shape = TextFieldDefaultsMMD.shape,
-        colors: TextFieldColors = colors(),
+        colors: TextFieldColorsMMD = colors(),
         contentPadding: PaddingValues =
             if (label == null) {
                 contentPaddingWithoutLabel()
@@ -367,14 +367,14 @@ object TextFieldDefaultsMMD {
     ): PaddingValues = PaddingValues(start, top, end, bottom)
 
     /**
-     * Creates a [TextFieldColors] that represents the default input text, container, and content
+     * Creates a [TextFieldColorsMMD] that represents the default input text, container, and content
      * colors (including label, placeholder, icons, etc.) used in a [TextFieldMMD].
      */
     @Composable
     fun colors() = defaultTextFieldColors
 
     /**
-     * Creates a [TextFieldColors] that represents the default input text, container, and content
+     * Creates a [TextFieldColorsMMD] that represents the default input text, container, and content
      * colors (including label, placeholder, icons, etc.) used in a [TextFieldMMD].
      *
      * @param focusedTextColor the color used for the input text of this text field when focused
@@ -472,7 +472,7 @@ object TextFieldDefaultsMMD {
         unfocusedSuffixColor: Color = Color.Unspecified,
         disabledSuffixColor: Color = Color.Unspecified,
         errorSuffixColor: Color = Color.Unspecified,
-    ): TextFieldColors =
+    ): TextFieldColorsMMD =
         defaultTextFieldColors.copy(
             focusedTextColor = focusedTextColor,
             unfocusedTextColor = unfocusedTextColor,
@@ -519,8 +519,8 @@ object TextFieldDefaultsMMD {
             errorSuffixColor = errorSuffixColor,
         )
 
-    private val defaultTextFieldColors: TextFieldColors
-        @Composable get() = TextFieldColors(
+    private val defaultTextFieldColors: TextFieldColorsMMD
+        @Composable get() = TextFieldColorsMMD(
             focusedTextColor = FocusInputColor,
             unfocusedTextColor = InputColor,
             disabledTextColor = DisabledInputColor
@@ -629,7 +629,7 @@ object TextFieldDefaultsMMD {
  *   colors used in [OutlinedTextField].
  */
 @Immutable
-class TextFieldColors(
+class TextFieldColorsMMD(
     val focusedTextColor: Color,
     val unfocusedTextColor: Color,
     val disabledTextColor: Color,
@@ -724,7 +724,7 @@ class TextFieldColors(
         disabledSuffixColor: Color = this.disabledSuffixColor,
         errorSuffixColor: Color = this.errorSuffixColor,
     ) =
-        TextFieldColors(
+        TextFieldColorsMMD(
             focusedTextColor.takeOrElse { this.focusedTextColor },
             unfocusedTextColor.takeOrElse { this.unfocusedTextColor },
             disabledTextColor.takeOrElse { this.disabledTextColor },
@@ -985,7 +985,7 @@ class TextFieldColors(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other !is TextFieldColors) return false
+        if (other == null || other !is TextFieldColorsMMD) return false
 
         if (focusedTextColor != other.focusedTextColor) return false
         if (unfocusedTextColor != other.unfocusedTextColor) return false
