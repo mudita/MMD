@@ -147,12 +147,7 @@ fun LazyColumnMMD(
     val layoutInfo by remember { derivedStateOf { state.layoutInfo } }
     var isDragging by remember { mutableStateOf(false) }
     val isScrollable by remember {
-        derivedStateOf {
-            val totalHeight =
-                layoutInfo.totalItemsCount * (layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0)
-            val viewportHeight = layoutInfo.viewportEndOffset - layoutInfo.viewportStartOffset
-            totalHeight > viewportHeight
-        }
+        derivedStateOf { state.canScrollBackward || state.canScrollForward }
     }
 
     Row(
@@ -274,12 +269,7 @@ fun LazyRowMMD(
     val layoutInfo by remember { derivedStateOf { state.layoutInfo } }
     var isDragging by remember { mutableStateOf(false) }
     val isScrollable by remember {
-        derivedStateOf {
-            val totalWidth =
-                layoutInfo.totalItemsCount * (layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0)
-            val viewportWidth = layoutInfo.viewportEndOffset - layoutInfo.viewportStartOffset
-            totalWidth > viewportWidth
-        }
+        derivedStateOf { state.canScrollBackward || state.canScrollForward }
     }
 
     Column(
