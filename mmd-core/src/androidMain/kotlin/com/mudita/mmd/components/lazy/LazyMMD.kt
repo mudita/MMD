@@ -126,6 +126,8 @@ import kotlin.math.min
  * @param horizontalAlignment the horizontal alignment applied to the items.
  * @param flingBehavior logic describing fling behavior.
  * @param scrollStep the number of items to scroll when the user drags the list. The default value is 4.
+ * @param isScrollbarVisible whether the scrollbar should be visible when the list is scrollable.
+ * The default value is true.
  * @param content a block which describes the content. Inside this block you can use methods like
  * [LazyListScope.item] to add a single item or [LazyListScope.items] to add a list of items.
  */
@@ -140,6 +142,7 @@ fun LazyColumnMMD(
     horizontalAlignment: Alignment.Horizontal = LazyDefaultsMMD.horizontalAlignment,
     flingBehavior: FlingBehavior = LazyDefaultsMMD.flignBehavior,
     scrollStep: Int = LazyDefaultsMMD.SCROLL_STEP,
+    isScrollbarVisible: Boolean = true,
     content: LazyListScope.() -> Unit,
 ) {
 
@@ -193,7 +196,7 @@ fun LazyColumnMMD(
             content()
         }
 
-        if (isScrollable) {
+        if (isScrollable && isScrollbarVisible) {
             VerticalScrollbar(
                 layoutInfo = layoutInfo,
                 listState = state,
@@ -252,6 +255,8 @@ fun LazyColumnMMD(
  * of them to fill the whole minimum size.
  * @param verticalAlignment the vertical alignment applied to the items
  * @param flingBehavior logic describing fling behavior.
+ * @param isScrollbarVisible whether the scrollbar should be visible when the list is scrollable.
+ * The default value is true.
  * @param content a block which describes the content. Inside this block you can use methods like
  * [LazyListScope.item] to add a single item or [LazyListScope.items] to add a list of items.
  */
@@ -267,6 +272,7 @@ fun LazyRowMMD(
     verticalAlignment: Alignment.Vertical = LazyDefaultsMMD.verticalAlignment,
     flingBehavior: FlingBehavior = LazyDefaultsMMD.flignBehavior,
     scrollStep: Int = LazyDefaultsMMD.SCROLL_STEP,
+    isScrollbarVisible: Boolean = true,
     content: LazyListScope.() -> Unit,
 ) {
 
@@ -319,7 +325,7 @@ fun LazyRowMMD(
             content()
         }
 
-        if (isScrollable) {
+        if (isScrollable && isScrollbarVisible) {
             HorizontalScrollbar(
                 layoutInfo = layoutInfo,
                 listState = state,
