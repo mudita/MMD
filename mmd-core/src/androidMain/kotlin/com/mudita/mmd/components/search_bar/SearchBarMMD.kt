@@ -30,6 +30,7 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.exclude
@@ -396,6 +397,9 @@ object SearchBarDefaultsMMD {
      *   emitting [Interaction]s for this input field. You can use this to change the search bar's
      *   appearance or preview the search bar in different states. Note that if `null` is provided,
      *   interactions will still happen internally.
+     * @param textFieldContentPadding the padding applied between the internal elements of the input
+     *   field (query text, placeholder, icons) and the edge of its container. Defaults to
+     *   [TextFieldDefaults.contentPaddingWithoutLabel].
      */
     @ExperimentalMaterial3Api
     @Composable
@@ -412,6 +416,7 @@ object SearchBarDefaultsMMD {
         trailingIcon: @Composable (() -> Unit)? = null,
         colors: TextFieldColorsMMD = inputFieldColors(),
         interactionSource: MutableInteractionSource? = null,
+        textFieldContentPadding: PaddingValues = TextFieldDefaults.contentPaddingWithoutLabel(),
     ) {
         @Suppress("NAME_SHADOWING")
         val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
@@ -466,7 +471,7 @@ object SearchBarDefaultsMMD {
                     },
                     shape = inputFieldShape,
                     colors = colors,
-                    contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(),
+                    contentPadding = textFieldContentPadding,
                     container = {},
                 )
             },
