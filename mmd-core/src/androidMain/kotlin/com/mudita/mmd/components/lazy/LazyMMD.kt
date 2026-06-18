@@ -30,6 +30,7 @@ import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -126,6 +127,8 @@ import kotlin.math.min
  * @param horizontalAlignment the horizontal alignment applied to the items.
  * @param flingBehavior logic describing fling behavior.
  * @param scrollStep the number of items to scroll when the user drags the list. The default value is 4.
+ * If set to 0, scrolling will follow the user's drag distance directly instead of snapping by
+ * a fixed number of items, which will increase the number of recompositions.
  * @param isScrollbarVisible whether the scrollbar should be visible when the list is scrollable.
  * The default value is true.
  * @param content a block which describes the content. Inside this block you can use methods like
@@ -166,16 +169,21 @@ fun LazyColumnMMD(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .pointerInput(Unit) {
+                .pointerInput(isScrollable, scrollStep) {
                     detectVerticalDragGestures(
                         onDragEnd = { isDragging = false },
                     ) { _, dragAmount ->
-                        if (!isDragging && isScrollable) {
-                            isDragging = true
-                            val direction = if (dragAmount > 0) -1 else 1
-                            val newIdx = (state.firstVisibleItemIndex + direction * scrollStep)
-                                .coerceIn(0, layoutInfo.totalItemsCount - 1)
-                            scope.launch { state.scrollToItem(newIdx) }
+                        if (!isScrollable) return@detectVerticalDragGestures
+                        if (scrollStep > 0) {
+                            if (!isDragging) {
+                                isDragging = true
+                                val direction = if (dragAmount > 0) -1 else 1
+                                val newIdx = (state.firstVisibleItemIndex + direction * scrollStep)
+                                    .coerceIn(0, layoutInfo.totalItemsCount - 1)
+                                scope.launch { state.scrollToItem(newIdx) }
+                            }
+                        } else {
+                            scope.launch { state.scrollBy(-dragAmount) }
                         }
                     }
                 },
@@ -250,6 +258,9 @@ fun LazyColumnMMD(
  * of them to fill the whole minimum size.
  * @param verticalAlignment the vertical alignment applied to the items
  * @param flingBehavior logic describing fling behavior.
+ * @param scrollStep the number of items to scroll when the user drags the list. The default value is 4.
+ * If set to 0, scrolling will follow the user's drag distance directly instead of snapping by
+ * a fixed number of items, which will increase the number of recompositions.
  * @param isScrollbarVisible whether the scrollbar should be visible when the list is scrollable.
  * The default value is true.
  * @param content a block which describes the content. Inside this block you can use methods like
@@ -291,16 +302,21 @@ fun LazyRowMMD(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .pointerInput(Unit) {
+                .pointerInput(isScrollable, scrollStep) {
                     detectHorizontalDragGestures(
                         onDragEnd = { isDragging = false },
                     ) { _, dragAmount ->
-                        if (!isDragging && isScrollable) {
-                            isDragging = true
-                            val direction = if (dragAmount > 0) -1 else 1
-                            val newIdx = (state.firstVisibleItemIndex + direction * scrollStep)
-                                .coerceIn(0, layoutInfo.totalItemsCount - 1)
-                            scope.launch { state.scrollToItem(newIdx) }
+                        if (!isScrollable) return@detectHorizontalDragGestures
+                        if (scrollStep > 0) {
+                            if (!isDragging) {
+                                isDragging = true
+                                val direction = if (dragAmount > 0) -1 else 1
+                                val newIdx = (state.firstVisibleItemIndex + direction * scrollStep)
+                                    .coerceIn(0, layoutInfo.totalItemsCount - 1)
+                                scope.launch { state.scrollToItem(newIdx) }
+                            }
+                        } else {
+                            scope.launch { state.scrollBy(-dragAmount) }
                         }
                     }
                 },
