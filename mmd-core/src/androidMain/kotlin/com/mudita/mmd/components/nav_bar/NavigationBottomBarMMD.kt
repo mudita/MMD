@@ -146,6 +146,43 @@ fun NavigationBarMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `tonalElevation` is not supported",
+    replaceWith = ReplaceWith(
+        "NavigationBarMMD(" +
+            "modifier = modifier, " +
+            "containerColor = containerColor, " +
+            "contentColor = contentColor, " +
+            "windowInsets = windowInsets, " +
+            "showTopDivider = true, " +
+            "content = content" +
+            ")",
+        imports = [
+            "com.mudita.mmd.components.nav_bar.NavigationBarDefaultsMMD",
+            "androidx.compose.material3.MaterialTheme",
+            "androidx.compose.material3.contentColorFor",
+            "androidx.compose.foundation.layout.RowScope",
+        ],
+    ),
+)
+@Composable
+fun NavigationBarMMD(
+    modifier: Modifier = Modifier,
+    containerColor: Color = NavigationBarDefaultsMMD.containerColor,
+    contentColor: Color = MaterialTheme.colorScheme.contentColorFor(containerColor),
+    tonalElevation: Dp,
+    windowInsets: WindowInsets = NavigationBarDefaultsMMD.windowInsets,
+    content: @Composable RowScope.() -> Unit,
+) = NavigationBarMMD(
+    modifier = modifier,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    windowInsets = windowInsets,
+    showTopDivider = true,
+    content = content,
+)
+
 /**
  * Material Design navigation bar item.
  *

@@ -86,6 +86,45 @@ fun FloatingActionButtonMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `elevation` is not supported",
+    replaceWith = ReplaceWith(
+        "FloatingActionButtonMMD(" +
+            "onClick = onClick, " +
+            "modifier = modifier, " +
+            "shape = shape, " +
+            "containerColor = containerColor, " +
+            "contentColor = contentColor, " +
+            "interactionSource = interactionSource, " +
+            "content = content, " +
+            ")",
+        imports = [
+            "com.mudita.mmd.components.buttons.FloatingActionButtonDefaultsMMD",
+            "androidx.compose.material3.contentColorFor",
+        ],
+    ),
+)
+@Composable
+fun FloatingActionButtonMMD(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    shape: Shape = FloatingActionButtonDefaultsMMD.shape,
+    containerColor: Color = FloatingActionButtonDefaultsMMD.containerColor,
+    contentColor: Color = contentColorFor(containerColor),
+    elevation: FloatingActionButtonElevation?,
+    interactionSource: MutableInteractionSource? = null,
+    content: @Composable () -> Unit,
+) = FloatingActionButtonMMD(
+    onClick = onClick,
+    modifier = modifier,
+    shape = shape,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    interactionSource = interactionSource,
+    content = content,
+)
+
 /**
  *
  * The FAB represents the most important action on a screen. It puts key actions within reach.
@@ -129,7 +168,46 @@ fun SmallFloatingActionButtonMMD(
     )
 }
 
-private object FloatingActionButtonDefaultsMMD {
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `elevation` is not supported",
+    replaceWith = ReplaceWith(
+        "SmallFloatingActionButtonMMD(" +
+            "onClick = onClick, " +
+            "modifier = modifier, " +
+            "shape = shape, " +
+            "containerColor = containerColor, " +
+            "contentColor = contentColor, " +
+            "interactionSource = interactionSource, " +
+            "content = content, " +
+            ")",
+        imports = [
+            "com.mudita.mmd.components.buttons.SmallFloatingActionButtonDefaultsMMD",
+            "androidx.compose.material3.contentColorFor",
+        ],
+    ),
+)
+@Composable
+fun SmallFloatingActionButtonMMD(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    shape: Shape = SmallFloatingActionButtonDefaultsMMD.smallShape,
+    containerColor: Color = SmallFloatingActionButtonDefaultsMMD.smallContainerColor,
+    contentColor: Color = contentColorFor(containerColor),
+    elevation: FloatingActionButtonElevation?,
+    interactionSource: MutableInteractionSource? = null,
+    content: @Composable () -> Unit,
+) = SmallFloatingActionButtonMMD(
+    onClick = onClick,
+    modifier = modifier,
+    shape = shape,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    interactionSource = interactionSource,
+    content = content,
+)
+
+object FloatingActionButtonDefaultsMMD {
     /**
      * Default border color for a floating action button.
      */
@@ -172,7 +250,7 @@ private object FloatingActionButtonDefaultsMMD {
     )
 }
 
-private object SmallFloatingActionButtonDefaultsMMD {
+object SmallFloatingActionButtonDefaultsMMD {
     /**
      * Default size for a small floating action button.
      * */

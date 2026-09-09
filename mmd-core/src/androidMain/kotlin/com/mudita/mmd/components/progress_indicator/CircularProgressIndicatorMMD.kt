@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -102,6 +103,157 @@ fun CircularProgressIndicatorMMD(
         )
     }
 }
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `progress`, `strokeWidth` " +
+        "and `strokeCap` are not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color, trackColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeWidth: Dp,
+    trackColor: Color = ProgressIndicatorDefaultsMMD.circularIndeterminateTrackColor,
+    strokeCap: StrokeCap = StrokeCap.Round,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+    trackColor = trackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `progress`, `strokeWidth`, " +
+        "`strokeCap` and `gapSize` are not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color, trackColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeWidth: Dp = 0.dp,
+    trackColor: Color = ProgressIndicatorDefaultsMMD.circularIndeterminateTrackColor,
+    strokeCap: StrokeCap = StrokeCap.Round,
+    gapSize: Dp = 0.dp,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+    trackColor = trackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `strokeWidth` and " +
+        "`strokeCap` are not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color, trackColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    strokeWidth: Dp,
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    trackColor: Color = ProgressIndicatorDefaultsMMD.circularIndeterminateTrackColor,
+    strokeCap: StrokeCap = StrokeCap.Round,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+    trackColor = trackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `progress`, `strokeWidth` " +
+        "and `strokeCap` are not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color, trackColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeWidth: Dp = 0.dp,
+    trackColor: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeCap: StrokeCap = StrokeCap.Round,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+    trackColor = trackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `progress` and " +
+        "`strokeWidth` are not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeWidth: Dp = 0.dp,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+    trackColor = ProgressIndicatorDefaultsMMD.circularIndeterminateTrackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `strokeWidth` is not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeWidth: Dp,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+    trackColor = ProgressIndicatorDefaultsMMD.circularIndeterminateTrackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `progress`, `strokeWidth` " +
+        "and `strokeCap` are not supported",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicatorMMD(modifier = modifier, color = color, trackColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.ProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun CircularProgressIndicatorMMD(
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaultsMMD.circularColor,
+    strokeCap: StrokeCap,
+) = CircularProgressIndicatorMMD(
+    modifier = modifier,
+    color = color,
+)
 
 object ProgressIndicatorDefaultsMMD {
     const val ANIMATION_STEP_DEGREES = 45f

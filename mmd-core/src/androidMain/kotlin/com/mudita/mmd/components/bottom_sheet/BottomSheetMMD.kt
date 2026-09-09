@@ -250,6 +250,64 @@ fun ModalBottomSheetMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `tonalElevation` is not supported",
+    replaceWith = ReplaceWith(
+        "ModalBottomSheetMMD(" +
+            "onDismissRequest = onDismissRequest, " +
+            "modifier = modifier, " +
+            "sheetState = sheetState, " +
+            "sheetMaxWidth = sheetMaxWidth, " +
+            "shape = shape, " +
+            "containerColor = containerColor, " +
+            "contentColor = contentColor, " +
+            "scrimColor = scrimColor, " +
+            "dragHandle = dragHandle, " +
+            "contentWindowInsets = contentWindowInsets, " +
+            "properties = properties, " +
+            "content = content" +
+            ")",
+        imports = [
+            "com.mudita.mmd.components.bottom_sheet.BottomSheetDefaultsMMD",
+            "com.mudita.mmd.components.bottom_sheet.ModalBottomSheetDefaultsMMD",
+            "com.mudita.mmd.components.bottom_sheet.rememberModalBottomSheetMMDState",
+            "androidx.compose.material3.contentColorFor",
+        ],
+    ),
+)
+
+@Composable
+@ExperimentalMaterial3Api
+fun ModalBottomSheetMMD(
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier,
+    sheetState: SheetStateMMD = rememberModalBottomSheetMMDState(),
+    sheetMaxWidth: Dp = BottomSheetDefaultsMMD.SheetMaxWidth,
+    shape: Shape = BottomSheetDefaultsMMD.ExpandedShape,
+    containerColor: Color = BottomSheetDefaultsMMD.ContainerColor,
+    contentColor: Color = contentColorFor(containerColor),
+    tonalElevation: Dp,
+    scrimColor: Color = BottomSheetDefaultsMMD.ScrimColor,
+    dragHandle: @Composable (() -> Unit)? = { BottomSheetDefaultsMMD.DragHandle() },
+    contentWindowInsets: @Composable () -> WindowInsets = { BottomSheetDefaultsMMD.windowInsets },
+    properties: ModalBottomSheetPropertiesMMD = ModalBottomSheetDefaultsMMD.properties,
+    content: @Composable ColumnScope.() -> Unit,
+) = ModalBottomSheetMMD(
+    onDismissRequest = onDismissRequest,
+    modifier = modifier,
+    sheetState = sheetState,
+    sheetMaxWidth = sheetMaxWidth,
+    shape = shape,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    scrimColor = scrimColor,
+    dragHandle = dragHandle,
+    contentWindowInsets = contentWindowInsets,
+    properties = properties,
+    content = content,
+)
+
 @Composable
 @ExperimentalMaterial3Api
 internal fun BoxScope.ModalBottomSheetContent(
