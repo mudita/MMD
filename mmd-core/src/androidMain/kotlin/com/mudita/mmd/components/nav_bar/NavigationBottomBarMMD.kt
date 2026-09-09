@@ -146,6 +146,38 @@ fun NavigationBarMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `tonalElevation` is not supported",
+    replaceWith = ReplaceWith(
+        """NavigationBarMMD(
+            modifier = modifier,
+            containerColor = containerColor,
+            contentColor = contentColor,
+            windowInsets = windowInsets,
+            showTopDivider = true,
+            content = content,
+            )
+        """,
+    ),
+)
+@Composable
+fun NavigationBarMMD(
+    modifier: Modifier = Modifier,
+    containerColor: Color = NavigationBarDefaultsMMD.containerColor,
+    contentColor: Color = MaterialTheme.colorScheme.contentColorFor(containerColor),
+    tonalElevation: Dp,
+    windowInsets: WindowInsets = NavigationBarDefaultsMMD.windowInsets,
+    content: @Composable RowScope.() -> Unit,
+) = NavigationBarMMD(
+    modifier = modifier,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    windowInsets = windowInsets,
+    showTopDivider = true,
+    content = content,
+)
+
 /**
  * Material Design navigation bar item.
  *
