@@ -54,6 +54,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastFirst
 import androidx.compose.ui.util.fastFirstOrNull
+import com.mudita.mmd.components.buttons.ButtonDefaultsMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import kotlin.math.max
 import kotlin.math.min
@@ -376,6 +377,7 @@ fun SnackbarMMD(
     shape: Shape = SnackbarDefaultsMMD.shape,
     containerColor: Color = SnackbarDefaultsMMD.color,
     contentColor: Color = SnackbarDefaultsMMD.contentColor,
+    actionColor: Color = SnackbarDefaultsMMD.actionColor,
     actionContentColor: Color = SnackbarDefaultsMMD.actionContentColor,
     dismissActionContentColor: Color = SnackbarDefaultsMMD.dismissActionContentColor,
     dividerColor: Color = SnackbarDefaultsMMD.dividerColor,
@@ -384,7 +386,15 @@ fun SnackbarMMD(
     SnackbarMMD(
         modifier = modifier.padding(vertical = 8.dp),
         action = snackbarData.visuals.actionLabel?.let { label ->
-            { OutlinedButtonMMD(onClick = snackbarData::performAction) { Text(label) } }
+            {
+                OutlinedButtonMMD(
+                    onClick = snackbarData::performAction,
+                    colors = ButtonDefaultsMMD.outlinedButtonColors().copy(
+                        contentColor = actionColor,
+                        disabledContentColor = actionColor.copy(alpha = 0.75f),
+                    ),
+                ) { Text(label) }
+            }
         },
         dismissAction = snackbarData.visuals.withDismissAction.takeIf { it }?.let {
             {
@@ -589,6 +599,10 @@ object SnackbarDefaultsMMD {
 
     /** Default content color of a snackbar. */
     val contentColor: Color
+        @Composable get() = MaterialTheme.colorScheme.inverseOnSurface
+
+    /** Default action color of a snackbar. */
+    val actionColor: Color
         @Composable get() = MaterialTheme.colorScheme.inverseOnSurface
 
     /** Default action content color of a snackbar. */

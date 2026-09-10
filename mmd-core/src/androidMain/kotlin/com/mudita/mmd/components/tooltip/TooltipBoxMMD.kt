@@ -30,6 +30,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.PopupPositionProvider
 import com.mudita.mmd.components.tooltip.CaretDirectionMMD.Down
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,7 +49,7 @@ fun TooltipBoxMMD(
             caretDirectionState.value = direction
         }
 
-    TooltipBox(
+    TooltipBoxMMD(
         positionProvider = positionProvider,
         tooltip = {
             CompositionLocalProvider(
@@ -57,10 +58,32 @@ fun TooltipBoxMMD(
                 tooltip()
             }
         },
+        state = state,
+        modifier = modifier,
+        focusable = focusable,
+        enableUserInput = enableUserInput,
+        content = content
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun TooltipBoxMMD(
+    positionProvider: PopupPositionProvider,
+    tooltip: @Composable TooltipScope.() -> Unit,
+    state: TooltipState,
+    modifier: Modifier = Modifier,
+    focusable: Boolean = true,
+    enableUserInput: Boolean = true,
+    content: @Composable () -> Unit,
+) {
+    TooltipBox(
+        positionProvider = positionProvider,
+        tooltip = tooltip,
         modifier = modifier,
         focusable = focusable,
         enableUserInput = enableUserInput,
         state = state,
-        content = content
+        content = content,
     )
 }

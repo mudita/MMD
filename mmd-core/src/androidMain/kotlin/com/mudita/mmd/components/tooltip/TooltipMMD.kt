@@ -21,16 +21,19 @@
 package com.mudita.mmd.components.tooltip
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,6 +44,8 @@ import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathOperation
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
@@ -212,6 +217,75 @@ fun TooltipMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `shape`, `tonalElevation` and " +
+        "`shadowElevation` are not supported",
+    replaceWith = ReplaceWith(
+        "TooltipMMD(modifier = modifier, caretSize = caretSize, containerColor = containerColor, " +
+            "contentColor = contentColor, content = content)",
+        imports = ["com.mudita.mmd.components.tooltip.TooltipDefaultsMMD"]
+    ),
+)
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PlainTooltipMMD(
+    modifier: Modifier = Modifier,
+    caretSize: DpSize = DpSize.Unspecified,
+    shape: Shape = RectangleShape,
+    contentColor: Color = TooltipDefaultsMMD.ContentColor,
+    containerColor: Color = TooltipDefaultsMMD.ContainerColor,
+    tonalElevation: Dp = 0.dp,
+    shadowElevation: Dp = 0.dp,
+    content: @Composable () -> Unit,
+) = TooltipMMD(
+    modifier = modifier,
+    caretSize = caretSize,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    content = content,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `shape`, `tonalElevation` and " +
+        "`shadowElevation` are not supported",
+    replaceWith = ReplaceWith(
+        "TooltipMMD(modifier = modifier, caretSize = caretSize, " +
+            "containerColor = colors.containerColor, contentColor = colors.contentColor) { " +
+            "Column { title?.invoke(); text(); action?.invoke() } }",
+        imports = [
+            "com.mudita.mmd.components.tooltip.TooltipDefaultsMMD",
+            "androidx.compose.foundation.layout.Column",
+            "androidx.compose.ui.graphics.RectangleShape"
+        ]
+    ),
+)
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RichTooltipMMD(
+    modifier: Modifier = Modifier,
+    title: (@Composable () -> Unit)? = null,
+    action: (@Composable () -> Unit)? = null,
+    caretSize: DpSize = DpSize.Unspecified,
+    shape: Shape = RectangleShape,
+    colors: TooltipColorsMMD = TooltipDefaultsMMD.tooltipColors(),
+    tonalElevation: Dp = 0.dp,
+    shadowElevation: Dp = 3.dp,
+    text: @Composable () -> Unit,
+) = TooltipMMD(
+    modifier = modifier,
+    caretSize = caretSize,
+    containerColor = colors.containerColor,
+    contentColor = colors.contentColor,
+) {
+    Column {
+        title?.invoke()
+        text()
+        action?.invoke()
+    }
+}
+
 enum class CaretDirectionMMD { Up, Down, Auto }
 
 /**
@@ -273,6 +347,14 @@ object TooltipDefaultsMMD {
         @Composable
         get() = MaterialTheme.colorScheme.primary
 
+    @Deprecated("Maintained for Material Design compatibility")
+    @Composable fun tooltipColors() = TooltipColorsMMD(
+        containerColor = ContainerColor,
+        contentColor = ContentColor,
+        titleContentColor = ContentColor,
+        actionContentColor = ContentColor
+    )
+
     /**
      * Provides a [PopupPositionProvider] for the tooltip.
      * Calculates the position of the tooltip relative to its anchor.
@@ -295,6 +377,15 @@ object TooltipDefaultsMMD {
         }
     }
 }
+
+@Deprecated("Maintained for Material Design compatibility")
+@Immutable
+data class TooltipColorsMMD(
+    val containerColor: Color,
+    val contentColor: Color,
+    val titleContentColor: Color,
+    val actionContentColor: Color
+)
 
 /**
  * A [PopupPositionProvider] implementation for positioning a tooltip relative to its anchor.

@@ -214,6 +214,43 @@ fun LazyColumnMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `userScrollEnabled` is not supported",
+    replaceWith = ReplaceWith(
+        "LazyColumnMMD(modifier = modifier, state = state, contentPadding = contentPadding, " +
+            "reverseLayout = reverseLayout, verticalArrangement = verticalArrangement, " +
+            "horizontalAlignment = horizontalAlignment, flingBehavior = flingBehavior, " +
+            "scrollStep = scrollStep, isScrollbarVisible = isScrollbarVisible, content = content)",
+    ),
+)
+@Composable
+fun LazyColumnMMD(
+    modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = LazyDefaultsMMD.contentPadding,
+    reverseLayout: Boolean = false,
+    verticalArrangement: Arrangement.Vertical =
+        LazyDefaultsMMD.verticalArrangement(reverseLayout),
+    horizontalAlignment: Alignment.Horizontal = LazyDefaultsMMD.horizontalAlignment,
+    flingBehavior: FlingBehavior = LazyDefaultsMMD.flignBehavior,
+    scrollStep: Int = LazyDefaultsMMD.SCROLL_STEP,
+    isScrollbarVisible: Boolean = true,
+    userScrollEnabled: Boolean = true,
+    content: LazyListScope.() -> Unit,
+) = LazyColumnMMD(
+    modifier = modifier,
+    state = state,
+    contentPadding = contentPadding,
+    reverseLayout = reverseLayout,
+    verticalArrangement = verticalArrangement,
+    horizontalAlignment = horizontalAlignment,
+    flingBehavior = flingBehavior,
+    scrollStep = scrollStep,
+    isScrollbarVisible = isScrollbarVisible,
+    content = content,
+)
+
 /**
  * The horizontally scrolling list that only composes and lays out the currently visible items.
  * The [content] block defines a DSL which allows you to emit items of different types. For
@@ -345,6 +382,44 @@ fun LazyRowMMD(
         }
     }
 }
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `userScrollEnabled` is not supported",
+    replaceWith = ReplaceWith(
+        "LazyRowMMD(modifier = modifier, state = state, contentPadding = contentPadding, " +
+            "reverseLayout = reverseLayout, horizontalArrangement = horizontalArrangement, " +
+            "verticalAlignment = verticalAlignment, flingBehavior = flingBehavior, " +
+            "scrollStep = scrollStep, isScrollbarVisible = isScrollbarVisible, content = content)",
+    ),
+)
+@Composable
+fun LazyRowMMD(
+    modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = LazyDefaultsMMD.contentPadding,
+    reverseLayout: Boolean = false,
+    horizontalArrangement: Arrangement.Horizontal = LazyDefaultsMMD.horizontalArrangement(
+        reverseLayout,
+    ),
+    verticalAlignment: Alignment.Vertical = LazyDefaultsMMD.verticalAlignment,
+    flingBehavior: FlingBehavior = LazyDefaultsMMD.flignBehavior,
+    scrollStep: Int = LazyDefaultsMMD.SCROLL_STEP,
+    isScrollbarVisible: Boolean = true,
+    userScrollEnabled: Boolean = true,
+    content: LazyListScope.() -> Unit,
+) = LazyRowMMD(
+    modifier = modifier,
+    state = state,
+    contentPadding = contentPadding,
+    reverseLayout = reverseLayout,
+    horizontalArrangement = horizontalArrangement,
+    verticalAlignment = verticalAlignment,
+    flingBehavior = flingBehavior,
+    scrollStep = scrollStep,
+    isScrollbarVisible = isScrollbarVisible,
+    content = content,
+)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -30,6 +30,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -59,9 +60,14 @@ import kotlinx.coroutines.flow.emptyFlow
  * @param shape defines the shape of this button's container, border (when [border] is not null)
  * @param colors [ButtonColors] that will be used to resolve the colors for this button in different
  * states. See [ButtonDefaultsMMD.buttonColors].
+ * @param elevation the border to draw around the container of this button
  * @param border the border to draw around the container of this button
  * @param contentPadding the spacing values to apply internally between the container and the
  * content
+ * @param interactionSource - an optional hoisted MutableInteractionSource for observing and
+ * emitting Interactions for this button. You can use this to change the button's appearance or
+ * preview the button in different states. Note that if null is provided, interactions will still
+ * happen internally.
  */
 @Composable
 fun ButtonMMD(
@@ -72,6 +78,7 @@ fun ButtonMMD(
     colors: ButtonColors = ButtonDefaultsMMD.buttonColors(),
     border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaultsMMD.contentPadding,
+    interactionSource: MutableInteractionSource? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
@@ -85,11 +92,55 @@ fun ButtonMMD(
         colors = colors,
         elevation = null,
         enabled = enabled,
-        interactionSource = remember { NoRippleInteractionSource() },
+        interactionSource = interactionSource ?: remember { NoRippleInteractionSource() },
         onClick = onClick,
     ) {
         content()
     }
+}
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `elevation` is not supported",
+    replaceWith = ReplaceWith(
+        "ButtonMMD(" +
+            "onClick = onClick, " +
+            "modifier = modifier, " +
+            "enabled = enabled, " +
+            "shape = shape, " +
+            "colors = colors, " +
+            "border = border, " +
+            "contentPadding = contentPadding, " +
+            "interactionSource = interactionSource, " +
+            "content = content, " +
+            ")",
+        imports = ["com.mudita.mmd.components.buttons.ButtonDefaultsMMD"],
+    ),
+)
+@Composable
+fun ButtonMMD(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = ButtonDefaultsMMD.shape,
+    colors: ButtonColors = ButtonDefaultsMMD.buttonColors(),
+    elevation: ButtonElevation?,
+    border: BorderStroke? = null,
+    contentPadding: PaddingValues = ButtonDefaultsMMD.contentPadding,
+    interactionSource: MutableInteractionSource? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    ButtonMMD(
+        modifier = modifier,
+        contentPadding = contentPadding,
+        shape = shape,
+        border = border,
+        colors = colors,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        onClick = onClick,
+        content = content,
+    )
 }
 
 /**
@@ -127,6 +178,7 @@ fun OutlinedButtonMMD(
     colors: ButtonColors = ButtonDefaultsMMD.outlinedButtonColors(),
     border: BorderStroke? = ButtonDefaultsMMD.outlinedButtonBorder(enabled),
     contentPadding: PaddingValues = ButtonDefaultsMMD.contentPadding,
+    interactionSource: MutableInteractionSource? = null,
     content: @Composable RowScope.() -> Unit,
 ) = ButtonMMD(
     onClick = onClick,
@@ -136,8 +188,53 @@ fun OutlinedButtonMMD(
     colors = colors,
     border = border,
     contentPadding = contentPadding,
+    interactionSource = interactionSource,
     content = content,
 )
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `elevation` is not supported",
+    replaceWith = ReplaceWith(
+        "OutlinedButtonMMD(" +
+            "onClick = onClick, " +
+            "modifier = modifier, " +
+            "enabled = enabled, " +
+            "shape = shape, " +
+            "colors = colors, " +
+            "border = border, " +
+            "contentPadding = contentPadding, " +
+            "interactionSource = interactionSource, " +
+            "content = content, " +
+            ")",
+        imports = ["com.mudita.mmd.components.buttons.ButtonDefaultsMMD"],
+    ),
+)
+@Composable
+fun OutlinedButtonMMD(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = ButtonDefaultsMMD.shape,
+    colors: ButtonColors = ButtonDefaultsMMD.buttonColors(),
+    elevation: ButtonElevation?,
+    border: BorderStroke? = null,
+    contentPadding: PaddingValues = ButtonDefaultsMMD.contentPadding,
+    interactionSource: MutableInteractionSource? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    OutlinedButtonMMD(
+        modifier = modifier,
+        contentPadding = contentPadding,
+        shape = shape,
+        border = border,
+        colors = colors,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        onClick = onClick,
+        content = content,
+    )
+}
 
 object ButtonDefaultsMMD {
     val buttonHorizontalPadding = 16.dp

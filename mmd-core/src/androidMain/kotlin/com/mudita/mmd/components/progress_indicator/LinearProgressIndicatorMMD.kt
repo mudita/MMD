@@ -107,6 +107,174 @@ fun LinearProgressIndicatorMMD(
     }
 }
 
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Use the original LinearProgressIndicatorMMD overload",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = progress, modifier = modifier, color = color, " +
+            "borderColor = trackColor, strokeCap = strokeCap)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color,
+    strokeCap: StrokeCap = LinearProgressIndicatorDefaultsMMD.LinearStrokeCap,
+) = LinearProgressIndicatorMMD(
+    progress = progress,
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+    strokeCap = strokeCap,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Use the original LinearProgressIndicatorMMD overload; `gapSize` and " +
+        "`drawStopIndicator` are not supported",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = progress, modifier = modifier, color = color, " +
+            "borderColor = trackColor, strokeCap = strokeCap)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color = LinearProgressIndicatorDefaultsMMD.linearBorderColor,
+    strokeCap: StrokeCap = LinearProgressIndicatorDefaultsMMD.LinearStrokeCap,
+    gapSize: Dp = 0.dp,
+    drawStopIndicator: DrawScope.() -> Unit = fun DrawScope.() {
+    },
+) = LinearProgressIndicatorMMD(
+    progress = progress,
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+    strokeCap = strokeCap,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = { 0f }, modifier = modifier, color = color, " +
+            "borderColor = trackColor, strokeCap = strokeCap)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color = LinearProgressIndicatorDefaultsMMD.linearBorderColor,
+    strokeCap: StrokeCap = LinearProgressIndicatorDefaultsMMD.LinearStrokeCap,
+) = LinearProgressIndicatorMMD(
+    progress = { 0f },
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+    strokeCap = strokeCap,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility; `gapSize` is not supported",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = { 0f }, modifier = modifier, color = color, " +
+            "borderColor = trackColor, strokeCap = strokeCap)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color = LinearProgressIndicatorDefaultsMMD.linearBorderColor,
+    strokeCap: StrokeCap = LinearProgressIndicatorDefaultsMMD.LinearStrokeCap,
+    gapSize: Dp = 0.dp,
+) = LinearProgressIndicatorMMD(
+    progress = { 0f },
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+    strokeCap = strokeCap,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility. " +
+        "Use the overload that takes `progress` as a lambda",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = { progress }, modifier = modifier, color = color, " +
+            "borderColor = trackColor, strokeCap = strokeCap)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color = LinearProgressIndicatorDefaultsMMD.linearBorderColor,
+    strokeCap: StrokeCap = LinearProgressIndicatorDefaultsMMD.LinearStrokeCap,
+) = LinearProgressIndicatorMMD(
+    progress = { progress },
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+    strokeCap = strokeCap,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility. " +
+        "Use the overload that takes `progress` as a lambda",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = { progress }, modifier = modifier, color = color, " +
+            "borderColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color = LinearProgressIndicatorDefaultsMMD.linearBorderColor,
+) = LinearProgressIndicatorMMD(
+    progress = { progress },
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+)
+
+@Suppress("UNUSED_PARAMETER")
+@Deprecated(
+    message = "Maintained for Material Design compatibility",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicatorMMD(progress = { 0f }, modifier = modifier, color = color, " +
+            "borderColor = trackColor)",
+        imports = ["com.mudita.mmd.components.progress_indicator.LinearProgressIndicatorDefaultsMMD"],
+    ),
+)
+@Composable
+fun LinearProgressIndicatorMMD(
+    modifier: Modifier = Modifier,
+    color: Color = LinearProgressIndicatorDefaultsMMD.linearColor,
+    trackColor: Color = LinearProgressIndicatorDefaultsMMD.linearBorderColor,
+) = LinearProgressIndicatorMMD(
+    progress = { 0f },
+    modifier = modifier,
+    color = color,
+    borderColor = trackColor,
+)
+
 private fun DrawScope.drawLinearIndicator(
     startFraction: Float,
     endFraction: Float,
