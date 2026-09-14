@@ -24,6 +24,7 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -32,12 +33,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 @Composable
 fun ThemeMMD(
     colorScheme: ColorScheme = eInkColorScheme,
+    shapes: Shapes = MaterialTheme.shapes,
     typography: Typography = eInkTypography,
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
         colorScheme = colorScheme,
         typography = typography,
+        shapes = shapes,
         content = {
             CompositionLocalProvider(
                 LocalRippleConfiguration provides null,
